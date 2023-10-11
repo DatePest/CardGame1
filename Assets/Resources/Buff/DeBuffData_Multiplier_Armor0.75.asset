@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab1a016764922746bee35048d017836, type: 3}
+  m_Name: DeBuffData_Multiplier_Armor0.75
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: a6a69173786dfcc469bd8a1a1978ea26, type: 3}
+  buffID: DeBuffData_Multiplier_Armor0.75
+  Description: "\u8B77\u7532\u6F14\u5C1125%"
+  IsCanDispel: 1
+  IsCanStack: 0
+  IsUnique: 0
+  UniqueLevel: 0
+  StackTimes: 1
+  buffTpye: 1
+  abilityClass: 0
+  Abilitys:
+  - {fileID: 11400000, guid: fb68dd37369aeed4ab17ca3c6a39ae25, type: 2}
+  IsNATimes: 0
+  TimeRound: 1
+  EndToRound_: 0

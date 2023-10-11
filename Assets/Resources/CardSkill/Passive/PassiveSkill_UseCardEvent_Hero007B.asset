@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9eb24981ce3247478127208a2998ab9, type: 3}
+  m_Name: PassiveSkill_UseCardEvent_Hero007B
+  m_EditorClassIdentifier: 
+  abilityID: PassiveSkill_UseCardEvent_Hero007B
+  SkillDepiction: "WST\uFF1A\u6BCF\u7576\u6575\u65B9\u6253\u51FA\u300C\u9632\u79A6\u300D\u7684\u5361\u6642\uFF0C\u7D66\u4E88\u6211\u65B9\u529B\u91CF\u6700\u9AD8\u7684\u55AE\u4F4D\u7A7F\u75321(1\u56DE\u5408\u6700\u591A3\u6B21)"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 12
+  Skill_NotTargets:
+  - {fileID: 11400000, guid: 1247e37139741d741949daac34ab7ddf, type: 2}
+  Skill_NeedTargets: []
+  Skill_TSs: []
+  CheckTS: {fileID: 11400000, guid: e68b4487e21071e4e946f91ad963aa00, type: 2}
+  Check_CurrentIs: 0
+  UpdataTime: 0
+  Round_UsageCount: 3
+  CardCheck:
+  - {fileID: 11400000, guid: 06074b55416e06746b036ef07825fd72, type: 2}
+  IsOwnUseCard: 0

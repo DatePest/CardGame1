@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179b2b6feac52c143a6e6e63c34fd700, type: 3}
+  m_Name: UserTarget_Custom_C001
+  m_EditorClassIdentifier: 
+  abilityID: UserTarget_Custom_C001
+  SkillDepiction: "\u795E\u8A71\u4E4B\u98A8\n\u6307\u5B9A1\u540D\u6211\u65B9\u82F1\u96C4\u653B\u64CA\u6575\u65B9\u6A6B\u63921\u6B21\uFF0C\u5982\u679C\u6307\u5B9A\u5929\u673D\u5247\u653B\u64CA\u5168\u90E8\u55AE\u4F4D1\u6B21"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 0
+  Temp_SaveData: 0
+  UseTemp_SaveData: 0
+  SelectType1: 0
+  SortTpye1: 0
+  unitChecks1: []
+  targetRange_1: 1
+  IfCkeck: {fileID: 11400000, guid: 259ea89b74d2e7b4a99766605d1f16c0, type: 2}
+  IsTurn: 0
+  waitAbilityTarget: 2
+  IsRandomTarget2: 0
+  targetRange_2: 0
+  mapShow2: 2
+  SelectType2: 0
+  SortTpye2: 0
+  unitChecks2: []
+  MapType: 0
+  Mapcondition: 0
+  FalseCheck_UserTarget:
+  - {fileID: 11400000, guid: 0d094f427c6015242841782717c76cf9, type: 2}
+  TrunCheck_UserTarget:
+  - {fileID: 11400000, guid: 1d907e0765a0ce943b96200f78faabe9, type: 2}
+  FalseCheck_NotTarget: []
+  TrunCheck_NotTarget: []

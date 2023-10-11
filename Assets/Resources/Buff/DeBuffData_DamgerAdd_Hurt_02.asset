@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab1a016764922746bee35048d017836, type: 3}
+  m_Name: DeBuffData_DamgerAdd_Hurt_02
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  buffID: DeBuffData_DamgerAdd_Hurt_02
+  Description: "\u53D7\u5230\u653B\u64CA\u6642\u984D\u5916\u53D7\u52302\u9EDE\u5F37\u5236\u50B7\u5BB3"
+  IsCanDispel: 1
+  IsCanStack: 0
+  IsUnique: 0
+  UniqueLevel: 0
+  buffTpye: 1
+  abilityClass: 0
+  Abilitys:
+  - {fileID: 11400000, guid: 16c519d20e6c6c54a9f918cd6cfdec50, type: 2}
+  IsNATimes: 0
+  TimeRound: 1
+  EndToRound_: 0

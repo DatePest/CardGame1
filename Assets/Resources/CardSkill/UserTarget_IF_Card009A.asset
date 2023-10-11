@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d874672dab001884386d07a81cd5dc86, type: 3}
+  m_Name: UserTarget_IF_Card009A
+  m_EditorClassIdentifier: 
+  abilityID: UserTarget_IF_Card009A
+  SkillDepiction: "\"\u6307\u5B9A1\u540D\u55AE\u4F4D\u8B77\u7532+2\u8207\u63A9\u8B77"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 2
+  Temp_SaveData: 1
+  UseTemp_SaveData: 0
+  SelectType1: 0
+  SortTpye1: 0
+  unitChecks1: []
+  targetRange_1: 1
+  UnitCheck: {fileID: 0}
+  FalseCheck_UserTarget: []
+  TrunCheck_UserTarget:
+  - {fileID: 11400000, guid: 0a8bcbcbf8044134088f9e769c90ea80, type: 2}
+  - {fileID: 11400000, guid: 9a6fbffb24ae1c944917c3a116348f67, type: 2}
+  FalseCheck_NotTarget: []
+  TrunCheck_NotTarget: []

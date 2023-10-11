@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce731d9211c9b5d429d7df0216c68459, type: 3}
+  m_Name: Hero004
+  m_EditorClassIdentifier: 
+  cardArt: {fileID: 21300000, guid: d73c267a15cbe93448274f81f3f3af73, type: 3}
+  UnitName: "\u7FE1\u4F0A"
+  UnitDepiction: "\u6BCF\u7576\u6211\u65B9\u55AE\u4F4D\u79FB\u52D5\uFF0C\u7D66\u4E88\u8A72\u55AE\u4F4D\u529B\u91CF+1\r\nWST\uFF1A\u6211\u65B9\u56DE\u5408\u7D50\u675F\u6642\uFF0C\u7D66\u4E88\u6575\u65B9\u6709\u707C\u50B7\u7684\u55AE\u4F4D\u5148\u52362\r\nDST\uFF1A[\u5149\u74B0]\u6301\u7E8C\u6DE8\u5316\u6211\u65B9\u5168\u9AD4\u707C\u50B7\uFF1B\r\n1\u56DE\u5408\u5167\u6211\u65B9\u9996\u6B21\u5C0D\u4EFB\u610F\u6575\u65B9\u9020\u6210\u707C\u50B7\u6642\uFF0C\u884C\u52D5+1"
+  unitID: Hero004
+  unitTpye: 1
+  attributesType: 2
+  BaseMaxHp: 20
+  BaseAtk: 5
+  BaseArmor: 1
+  Buffs: []
+  Abilities: []
+  Skills:
+  - {fileID: 11400000, guid: 77fd1bd4f6ab8384b91f71f93cb4f563, type: 2}
+  - {fileID: 11400000, guid: bcf4a376665ac4941af2d2fb0f3f0155, type: 2}
+  - {fileID: 11400000, guid: 3c8048f7652df7c45b39f9e127453bc3, type: 2}
+  - {fileID: 11400000, guid: 10ecc0c4809d89f4ea271e5ae54b983b, type: 2}

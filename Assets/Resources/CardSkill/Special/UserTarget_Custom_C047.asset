@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaef1ee820b61c4eada727c11e09bf4, type: 3}
+  m_Name: UserTarget_Custom_C047
+  m_EditorClassIdentifier: 
+  abilityID: UserTarget_Custom_C047
+  SkillDepiction: "\u6307\u5B9A1\u540D\u6211\u65B9\u82F1\u96C4\u529B\u91CF+1\u6216\u8B77\u7532+2"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 13
+  Temp_SaveData: 0
+  UseTemp_LoadData: 0
+  LoadData_NotLoadMap: 0
+  SelectType1: 0
+  SortTpye1: 0
+  unitChecks1: []
+  targetRange_1: 1
+  UnitTyperange:
+    Hero: 1
+    Summoner: 0
+    Barrier: 0
+  FalseCheck_UserTarget:
+  - {fileID: 11400000, guid: 0a8bcbcbf8044134088f9e769c90ea80, type: 2}
+  TrunCheck_UserTarget:
+  - {fileID: 11400000, guid: edc9fea826c6eac42a22e69a4d791d79, type: 2}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b293971e74358a241a73d770ad5ee901, type: 3}
+  m_Name: TS_Manual02
+  m_EditorClassIdentifier: 
+  abilityID: TS_Manual02
+  SkillDepiction: 
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 7
+  skillType: 0
+  TSskillType: 0
+  ManualSelect: 1
+  IsCanNull: 0
+  TS_Times: 2

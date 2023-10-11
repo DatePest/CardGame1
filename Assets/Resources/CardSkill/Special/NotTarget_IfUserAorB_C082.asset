@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97a8f93dfee7f574da6cddf0f31366d9, type: 3}
+  m_Name: NotTarget_IfUserAorB_C082
+  m_EditorClassIdentifier: 
+  abilityID: NotTarget_IfUserAorB_C082
+  SkillDepiction: "\u7BC0\u594F1:\u6575\u65B9\u5168\u9AD4\u529B\u91CF-1(A)\u6216\u8B77\u7532-1(B)"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 13
+  Temp_SaveData: 0
+  UseTemp_SaveData: 0
+  target: 0
+  FalseCheck_UserTarget:
+  - {fileID: 11400000, guid: 04e77c4feec6d3c429b57f4f0fcab1c7, type: 2}
+  TrunCheck_UserTarget:
+  - {fileID: 11400000, guid: 26e269009f92d634898a9b1ba64c1c82, type: 2}

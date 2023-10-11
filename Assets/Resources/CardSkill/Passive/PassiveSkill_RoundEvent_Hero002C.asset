@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2903d4ca001cfda47b28cd13088de565, type: 3}
+  m_Name: PassiveSkill_RoundEvent_Hero002C
+  m_EditorClassIdentifier: 
+  abilityID: PassiveSkill_RoundEvent_Hero002C
+  SkillDepiction: "DST:\u6575\u65B9\u9032\u653B\u968E\u6BB51\u958B\u59CB\u6642\uFF0C\u5982\u679C\u81EA\u8EAB\u6709\u5805\u5FCD\uFF0C\u8B77\u7532+2\uFF0C\u53CD\u4E4B\u7372\u5F97\u5805\u5FCD"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 2
+  Skill_NotTargets: []
+  Skill_NeedTargets:
+  - {fileID: 11400000, guid: 24bbaa341161bda4e81c08a5b3d8d20a, type: 2}
+  Skill_TSs: []
+  CheckTS: {fileID: 11400000, guid: 768a808be075b324d93e091dc0c454e1, type: 2}
+  Check_CurrentIs: 0
+  RestTime: 7
+  Round_UsageCount: 1
+  Check: []
+  UseTimeTime: 1

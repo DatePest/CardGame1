@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f95974ecf1f7c6418de28568fe47923, type: 3}
+  m_Name: Random_DeckGotoHand_Dark
+  m_EditorClassIdentifier: 
+  Times: 1
+  From: 1
+  Target: 0
+  IsRandom: 1
+  CheckList:
+  - {fileID: 11400000, guid: 2ddd74113a1f0b74eb685aeb0ead4481, type: 2}
+  IsUseDisCardAbilities: 1

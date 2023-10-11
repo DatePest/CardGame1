@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f6c94e42df90a43b1fb93fadb10485, type: 3}
+  m_Name: ToSearchCard_DecktoHand_TS
+  m_EditorClassIdentifier: 
+  abilityID: ToSearchCard_DecktoHand_TS
+  SkillDepiction: "\u6AA2\u7D22TS"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 6
+  Temp_SaveData: 0
+  UseTemp_SaveData: 0
+  From: 1
+  Target: 0
+  Times: 1
+  IsRandom: 0
+  CheckList:
+  - {fileID: 11400000, guid: 2fffb99f5d856ca4fb8f137fe1e7e531, type: 2}
+  IsUseDisCardAbilities: 0
+  EX_Enable: 0
+  CardChecks: []
+  TurnSkills: []
+  FalseSkills: []
+  TurnSkills2: []
+  FalseSkills2: []

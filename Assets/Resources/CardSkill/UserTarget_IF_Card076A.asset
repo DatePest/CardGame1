@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d874672dab001884386d07a81cd5dc86, type: 3}
+  m_Name: UserTarget_IF_Card076A
+  m_EditorClassIdentifier: 
+  abilityID: UserTarget_IF_Card076A
+  SkillDepiction: "\u7D66\u4E88\u6575\u65B91\u540D\u55AE\u4F4D\u707C\u50B7\uFF0C\u5982\u679C\u5DF2\u6709\u707C\u50B7\u5247\u5148\u52363"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 3
+  Temp_SaveData: 0
+  UseTemp_LoadData: 0
+  LoadData_NotLoadMap: 0
+  SelectType1: 0
+  SortTpye1: 0
+  unitChecks1: []
+  targetRange_1: 0
+  UnitTyperange:
+    Hero: 1
+    Summoner: 0
+    Barrier: 0
+  UnitCheck: {fileID: 11400000, guid: e2f6814da893fd54882d8e3962de9734, type: 2}
+  FalseCheck_UserTarget:
+  - {fileID: 11400000, guid: 98c8e035b0859474e8d885bd746fc09a, type: 2}
+  TrunCheck_UserTarget:
+  - {fileID: 11400000, guid: 20a5c50b9963e0c4cad5e83c0daa2c47, type: 2}
+  FalseCheck_NotTarget: []
+  TrunCheck_NotTarget: []
