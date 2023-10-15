@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3837f1488acf6534f8f33e15053a7039, type: 3}
+  m_Name: Ability_H004C
+  m_EditorClassIdentifier: 
+  AbilityId: Ability_H004C
+  Skill:
+    Skill: {fileID: 11400000, guid: a0ca23339291a014ab49f7dce065c177, type: 2}
+  CheckBuff:
+    buffs:
+    - {fileID: 11400000, guid: 46adca57d2a98f348953310c42526aaa, type: 2}
+    - {fileID: 11400000, guid: 07cc15fd738990c41abaa4423b2fced7, type: 2}

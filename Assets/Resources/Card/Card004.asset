@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba65e17839f8684458765fd953b99ec1, type: 3}
+  m_Name: Card004
+  m_EditorClassIdentifier: 
+  cardArt: {fileID: 21300000, guid: 2474db963be864c43ace7da0d9088e41, type: 3}
+  cardname: "\u8FF7\u832B\u5929\u969B"
+  cardId: C004
+  cardType: 2
+  HeroID: Hero001
+  CardAttributesType: 5
+  Abilities_1:
+  - {fileID: 11400000, guid: e816cb4805d9a4e4da9e3fd4796841e8, type: 2}
+  - {fileID: 11400000, guid: 7ede780a117608d4fa5ac9699784ea8a, type: 2}
+  - {fileID: 11400000, guid: ec8de49a19e14cf40ada6b2927772ad8, type: 2}
+  EX1_Wex: []
+  EX2_Dex:
+  - {fileID: 11400000, guid: be9e26c36199e0e44b1d92bb2615c1af, type: 2}
+  DiscardAbilities: []
+  SkillDepiction: "\"\u5F9E\u724C\u7D44\u6AA2\u7D22\u884C\u52D5\u5361\u8207\u52E2\u529B\u5361\u54041\u5F35\uFF0C\u96A8\u6A5F\u6368\u68C41\u5F35\u624B\u724C\nDEX4\uFF1A\u5F9E\u68C4\u724C\u5340\u6AA2\u7D221\u5F35\u5361\""
+  EX1_Wex_Cost: 0
+  EX2_Dex_Cost: 4
+  DeckUpperlimit: 2

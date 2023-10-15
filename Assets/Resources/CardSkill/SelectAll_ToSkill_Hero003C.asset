@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702c5095c40c4ca439912fd594e3b734, type: 3}
+  m_Name: SelectAll_ToSkill_Hero003C
+  m_EditorClassIdentifier: 
+  abilityID: SelectAll_ToSkill_Hero003C
+  SkillDepiction: 
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 11
+  Temp_SaveData: 0
+  UseTemp_SaveData: 0
+  target: 0
+  UnitCheck: []
+  Skills:
+  - {fileID: 11400000, guid: 7eadf71c04a3338428e7b1e5a44c8422, type: 2}

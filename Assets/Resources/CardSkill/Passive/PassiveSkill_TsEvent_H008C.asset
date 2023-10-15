@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e7875c86d0f0544bb9570b014590dc, type: 3}
+  m_Name: PassiveSkill_TsEvent_H008C
+  m_EditorClassIdentifier: 
+  abilityID: PassiveSkill_TsEvent_H008C
+  SkillDepiction: "DST:\u6DE8\u5316\u6211\u65B9\u5168\u9AD4\u82F1\u96C4\u707C\u50B7\u3001\u6C89\u9ED8"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 4
+  Skill_NotTargets: []
+  Skill_NeedTargets:
+  - {fileID: 11400000, guid: 4da40a582240bf7488bc274da8d2615e, type: 2}
+  - {fileID: 11400000, guid: 907b7c154a7dda545a2e794750d95d32, type: 2}
+  - {fileID: 11400000, guid: c02450ff409b5324dadd5be46d7bd9c2, type: 2}
+  Skill_TSs: []
+  CheckTS: {fileID: 11400000, guid: 768a808be075b324d93e091dc0c454e1, type: 2}
+  Check_CurrentIs: 2
+  RestTime: 0
+  Round_UsageCount: 99

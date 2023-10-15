@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbe5d6788105744ea211609e42cba41, type: 3}
+  m_Name: PassiveSkill_Aura_Hero005A
+  m_EditorClassIdentifier: 
+  abilityID: PassiveSkill_Aura_Hero005A
+  SkillDepiction: "\u6BCF\u7576\u6211\u65B9\u82F1\u96C4\u88AB\u6DE8\u5316\uFF0C\u6BCF\u79FB\u96641\u500B\u8CA0\u9762\u72C0\u614B\uFF0C\u5C31\u4F7F\u529B\u91CF\u8207\u8B77\u7532+11"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 2
+  PassivelSwitch: {fileID: 0}
+  targetRange: 1
+  buff: {fileID: 11400000, guid: c00d7caaad8ba674fbd201345b7713e2, type: 2}

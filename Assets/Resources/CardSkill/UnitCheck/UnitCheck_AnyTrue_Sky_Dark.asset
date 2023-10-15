@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5ee5cea57299f44942aaf530d7e493, type: 3}
+  m_Name: UnitCheck_AnyTrue_Sky_Dark
+  m_EditorClassIdentifier: 
+  IsNot: 0
+  CList:
+  - {fileID: 11400000, guid: edd152e3641d1be41a25e3e3a348e2ec, type: 2}
+  - {fileID: 11400000, guid: 26f9eaa257edeb746a861dc245a37884, type: 2}
