@@ -21,4 +21,8 @@ public class Singleton_T<T>  where T : class, new()
             return instance;
         }
     }
+    public void DesteryInstance()
+    {
+        instance = null;
+    }
 }

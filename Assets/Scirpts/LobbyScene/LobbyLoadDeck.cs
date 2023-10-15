@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
-
-public class RoomLoadDeck : MonoBehaviour
+namespace LobbyScene
+{
+    public class LobbyLoadDeck : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI Text;
+    [SerializeField] Button button;
+    public Button LoadDeckButton => button;
+
     [SerializeField] LoadScreen loadScreen;
     DeckData deckData =null;
     public bool DeckCheck { get { if (deckData != null) return true; else return false; } }
@@ -19,6 +24,8 @@ public class RoomLoadDeck : MonoBehaviour
         {
             Directory.CreateDirectory(SavePath);
         }
+        loadScreen = Instantiate(loadScreen, transform);
+        button.onClick.AddListener(ShowLoadScreen);
     }
     //testdeck
     DeckData Test()
@@ -43,6 +50,7 @@ public class RoomLoadDeck : MonoBehaviour
     }
     public void ShowLoadScreen()
     {
+        if (loadScreen.gameObject.activeSelf) return;
         loadScreen.gameObject.SetActive(true);
 
         var Names = Directory.GetFiles(SavePath);
@@ -99,5 +107,6 @@ public class RoomLoadDeck : MonoBehaviour
             }
         }
         return b; 
+    }
     }
 }

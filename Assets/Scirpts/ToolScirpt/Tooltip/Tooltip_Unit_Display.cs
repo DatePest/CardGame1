@@ -8,6 +8,12 @@ public class Tooltip_Unit_Display : TooltipBase
     [SerializeField] UnitSolt unit_Display;
     [SerializeField] ObjPool pool;
     [SerializeField] TextMeshProUGUI equipment;
+
+    public override void Ins()
+    {
+        //throw new System.NotImplementedException();
+    }
+
     public void Set_Show(Unit unit)
     {
         equipment.text = "";

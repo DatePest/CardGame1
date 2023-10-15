@@ -37,6 +37,11 @@ public class SkillSelectTooltip : TooltipBase
         }
         return null;
     }
+
+    public override void Ins()
+    {
+        //throw new System.NotImplementedException();
+    }
 }
 public enum SelectTargetTpye
 {

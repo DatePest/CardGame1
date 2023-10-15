@@ -6,105 +6,54 @@ using UnityEngine.UI;
 using TMPro;
 using Steamworks;
 using Steamworks.Data;
-
-public class LobbySceneManager : MonoBehaviour
+namespace LobbyScene
 {
-    [SerializeField] GameObject LoadButton;
-    public LobbyPlayer[]  Playersolt { get; private set; } = new LobbyPlayer[2];
-    [SerializeField] Button StartButton;
-    [SerializeField] TextMeshProUGUI LobbyID;
-    public RoomLoadDeck loadDeck { get; private set; }
-    public LobbySceneState_Netwrok lobbyState_ { get; private set; }
-    //public LobbyPlayer[] _Players => playersolt;
-    bool Startlook = false;
-    // Start is called before the first frame update
-    private void Awake()
+    public class LobbySceneManager : MonoBehaviour
     {
-        StartButton.gameObject.SetActive(false);
-        lobbyState_ = FindAnyObjectByType<LobbySceneState_Netwrok>();
-        loadDeck = FindAnyObjectByType<RoomLoadDeck>();
-        Playersolt = FindObjectsByType<LobbyPlayer>(0);
-        //lobbyState_ = FindAnyObjectByType<LobbyState_Netwrok>();
-    }
-    void Start()
-    {
-        LobbyID.text = "ID = " +GameManager.Instance.steamManager.CurrentLobby.Value.Id;
-        foreach (var a in Playersolt)
-        {
-            a.SetlobbyManager(this);
-            a.gameObject.SetActive(false);
-        }
-        IsHost();
-        lobbyState_.RStart();
-    }
-
-    void IsHost()
-    {
-        if (!NetworkManager.Singleton.IsHost) return;
-        //StartButton.gameObject.SetActive(true);
-    }
-    void IsClinet()
-    {
-        if (!NetworkManager.Singleton.IsClient) return;
-    }
-    public void CopyLobbyIDButton()
-    {
-        TextEditor text = new TextEditor();
-        text.text = GameManager.Instance.steamManager.CurrentLobby.Value.Id.ToString();
-        text.OnFocus();
-        text.Copy();
-    }
-
-    public void GameStartButton()
-    {
+        //[SerializeField] GameObject LoadButton;
+        LobbyScene_Ctrl lobbyScene_Ctrl;
+        public LobbyButton lobbyButton { get; private set; }
+        public LobbyLoadDeck lobbyLoadDeck { get; private set; }
+        public LobbySceneState_Netwrok lobbyState_ { get; private set; }
+        public LobbyPlayer[] Playersolt { get; private set; } = new LobbyPlayer[2];
+        //[SerializeField] Button StartButton;
+        [SerializeField] TextMeshProUGUI LobbyID;
        
-        if (Startlook) return;
-        Startlook = true;
-        if (NetworkManager.Singleton.IsHost || NetworkManager.Singleton.IsServer)
+        
+        private void Awake()
         {
-            Debug.Log("GameStartButton");
-            
-            lobbyState_.GetDeckData_ServerRpc();
+            lobbyScene_Ctrl = new(this);
+            lobbyButton = FindAnyObjectByType<LobbyButton>();
+            lobbyLoadDeck = FindAnyObjectByType<LobbyLoadDeck>();
+            lobbyState_ = FindAnyObjectByType<LobbySceneState_Netwrok>();
+            Playersolt = FindObjectsByType<LobbyPlayer>(0);
         }
-    }
+        void Start()
+        {
+            LobbyID.text = "ID = " + GameManager.Instance.steamManager.CurrentLobby.Value.Id;
+            foreach (var a in Playersolt)
+            {
+                a.gameObject.SetActive(false);
+            }
+            IsHost();
+            lobbyState_.RStart();
+        }
+        private void OnDestroy()
+        {
+            lobbyScene_Ctrl.DesteryInstance();
+        }
 
-    public void ReadyButton()
-    {
-        if (!loadDeck.DeckCheck) return;
-        foreach (var a in Playersolt)
+        void IsHost()
         {
-            if (a.OwnerID == NetworkManager.Singleton.LocalClientId)
-            {
-                a.IsReadyUpdata();
-                return;
-            }
+            if (!NetworkManager.Singleton.IsHost) return;
+            //StartButton.gameObject.SetActive(true);
         }
-    }
-    public void LobbyLeaveButton()
-    {
-        GameManager.Instance.steamManager.LobbyLeave();
-        GameManager.Instance.Transport.Shutdown();
-        NetworkManager.Singleton.Shutdown();
-        GameManager.Instance.SceneManager.LocalLoadSceneAsync(Scene.TestMain);
-    }
-    public void CheckAllReady()
-    {
-        foreach (var a in Playersolt)
+        void IsClinet()
         {
-            if (a.IsReady == false)
-            {
-                StartButton.gameObject.SetActive(false);
-                return;
-            }
-                
+            if (!NetworkManager.Singleton.IsClient) return;
         }
-        StartButton.gameObject.SetActive(true);
-    }
-    public void HideLoadDeckButton(bool b)
-    {
-        if(b)
-            LoadButton.gameObject.SetActive(false);
-        else
-            LoadButton.gameObject.SetActive(true);
+        
+      
     }
 }
+

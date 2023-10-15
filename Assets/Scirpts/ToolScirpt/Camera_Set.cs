@@ -8,7 +8,6 @@ public class Camera_Set : MonoBehaviour
     [SerializeField]  int maxView = 75;
     [SerializeField]  int minView = 50;
     [SerializeField]  float slideSpeed = 20;
-
     private void OnEnable()
     {
         myCamera = this.GetComponent<Camera>();
@@ -17,7 +16,6 @@ public class Camera_Set : MonoBehaviour
     {
         myCamera = null;
     }
-    // Update is called once per frame
     void Update()
     {
         if (myCamera == null) return;

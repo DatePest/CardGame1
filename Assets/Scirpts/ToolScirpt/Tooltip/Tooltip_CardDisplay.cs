@@ -5,6 +5,12 @@ using UnityEngine;
 public class Tooltip_CardDisplay : TooltipBase
 {
     [SerializeField] CardDisplay_CardSelect display;
+
+    public override void Ins()
+    {
+        //throw new System.NotImplementedException();
+    }
+
     public void Set_Show(SO_CardBase cardBase)
     {
         TooltipSystem.Instance.CloseAll();

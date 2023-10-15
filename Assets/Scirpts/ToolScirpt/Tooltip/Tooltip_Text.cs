@@ -6,11 +6,15 @@ using UnityEngine;
 
 public class Tooltip_Text : TooltipBase
 {
-    [SerializeField] RectTransform CanvasRect;
+    [SerializeField] RectTransform RootCanvasRect;
     [SerializeField] TextMeshProUGUI TooltipText;
     [SerializeField] RectTransform Background;
     Vector2 onignal = new(400, 200);
-
+    public override void Ins()
+    {
+        var T = GetComponentInParent<Canvas>();
+        RootCanvasRect = T.GetComponent<RectTransform>();
+    }
     public void SetTooltipText(string Text)
     {
         gameObject.SetActive(true);
@@ -31,11 +35,13 @@ public class Tooltip_Text : TooltipBase
 
     void SetPosition()
     {
-        Vector2 Position = Input.mousePosition / CanvasRect.localScale.x;
-        if (Position.x + Background.rect.width > CanvasRect.rect.width)
-            Position.x = CanvasRect.rect.width - Background.rect.width;
-        if (Position.y + Background.rect.height > CanvasRect.rect.height)
-            Position.y = CanvasRect.rect.height - Background.rect.height;
+        Vector2 Position = Input.mousePosition / RootCanvasRect.localScale.x;
+        if (Position.x + Background.rect.width > RootCanvasRect.rect.width)
+            Position.x = RootCanvasRect.rect.width - Background.rect.width;
+        if (Position.y + Background.rect.height > RootCanvasRect.rect.height)
+            Position.y = RootCanvasRect.rect.height - Background.rect.height;
         Background.anchoredPosition = Position;
     }
+
+  
 }

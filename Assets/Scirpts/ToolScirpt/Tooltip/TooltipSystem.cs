@@ -14,9 +14,9 @@ public class TooltipSystem : Singleton_T_Mono<TooltipSystem>
     public Tooltip_Unit_Display Tooltip_Unit_Display => tooltip_Unit_Display;
     private void Start()
     {
-        //tooltip_Text = GetComponentInChildren<Tooltip_Text>();
-        //tooltip_CardDisplay = GetComponentInChildren<Tooltip_CardDisplay>();
-        //tooltip_Unit_Display = GetComponentInChildren<Tooltip_Unit_Display>();
+        tooltip_Text = Instantiate(Tooltip_Text, transform);
+        tooltip_CardDisplay = Instantiate(tooltip_CardDisplay, transform);
+        tooltip_Unit_Display = Instantiate(tooltip_Unit_Display, transform);
         DontDestroyOnLoad(gameObject);
     }
 
@@ -32,11 +32,12 @@ public class TooltipSystem : Singleton_T_Mono<TooltipSystem>
     }
 }
 
-public class TooltipBase : MonoBehaviour
+public abstract class TooltipBase : MonoBehaviour
 {
-    
+    public abstract void Ins();
     private  void Start()
     {
+        Ins();
         gameObject.SetActive(false);
     }
     public virtual void Close()

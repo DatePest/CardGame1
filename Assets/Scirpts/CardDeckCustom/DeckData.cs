@@ -31,14 +31,14 @@ public struct PlayerDeckData : INetworkSerializable, IEquatable<PlayerDeckData>
     public HeroPointData[] Heros;
     public NetworkString[] Dards;
     public ulong ClientID;
-    public byte Number_Player;
+    //public byte Number_Player;
 
-    public PlayerDeckData(DeckData deckData, ulong clientID , byte number_Player)
+    public PlayerDeckData(DeckData deckData, ulong clientID )
     {
         Heros = deckData.Heros ;
         Dards = new NetworkString[deckData.Dards.Length];
         ClientID = clientID;
-        Number_Player = number_Player;
+        //Number_Player = number_Player;
         SetSelectCardId(deckData.Dards);
     }
     public void SetSelectCardId(string[] List)
@@ -55,7 +55,7 @@ public struct PlayerDeckData : INetworkSerializable, IEquatable<PlayerDeckData>
         serializer.SerializeValue(ref Heros);
         serializer.SerializeValue(ref Dards);
         serializer.SerializeValue(ref ClientID);
-        serializer.SerializeValue(ref Number_Player);
+        //serializer.SerializeValue(ref Number_Player);
     }
     public bool Equals(PlayerDeckData other)
     {
