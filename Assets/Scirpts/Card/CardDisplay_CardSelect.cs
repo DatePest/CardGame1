@@ -61,7 +61,7 @@ public class CardDisplay_CardSelect : MonoBehaviour
     {
         if (CardgameObject == null) return;
         var Card = CardgameObject.GetComponentInChildren<CardSolt>();
-        gameObject.GetComponentInParent<CardSelectManager>().SelectReturn_1(Card.CardUid, this.gameObject); ;
+        gameObject.GetComponentInParent<CardSelectUI>().SelectReturn_1(Card.CardUid, this.gameObject); ;
     }
 
 }

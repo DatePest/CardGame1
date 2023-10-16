@@ -110,7 +110,7 @@ public class Skill_Aura : PassiveSkillBase
 
     List<Unit> GetRange()
     {
-        var UList = CardGameManager.Instance.GetAllSelectRange(Data.Value, targetRange);
+        var UList = CardGame_Ctrl_Net.Instance.GetAllSelectRange(Data.Value, targetRange);
         List<Unit> Last = new();
         foreach (var a in UList)
         {

@@ -12,7 +12,7 @@ public sealed class Skill_PlayerEvent_UseEXSkill_UnitAddbuff : Skill_NotTarget
     [SerializeField] UnitCheck_UnitID unitID;
     public override async Task UseSkill(AbilityNeedData data)
     {
-        var UList = CardGameManager.Instance.GetAllSelectRange(data, TargetRange.Own);
+        var UList = CardGame_Ctrl_Net.Instance.GetAllSelectRange(data, TargetRange.Own);
         foreach(var a in UList)
         {
             if (unitID.UseCheck(a))

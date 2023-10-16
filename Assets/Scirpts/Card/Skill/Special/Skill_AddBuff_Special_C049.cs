@@ -13,7 +13,7 @@ public sealed class Skill_AddBuff_Special_C049 : Skill_NotTarget_All
 
     public override async Task UseSkill(AbilityNeedData data)
     {
-        var UL = CardGameManager.Instance.GetAllSelectRange(data, target);
+        var UL = CardGame_Ctrl_Net.Instance.GetAllSelectRange(data, target);
 
         
         foreach (var a in UL)

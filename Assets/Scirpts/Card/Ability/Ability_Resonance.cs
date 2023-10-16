@@ -14,7 +14,7 @@ public class Ability_Resonance : AbilityBase
         //if (!NetworkManager.Singleton.IsHost || !NetworkManager.Singleton.IsServer) return;
         unit.SetAtk_Resonance(true);
         MyUnit = unit;
-        var UL = CardGameManager.Instance.GetAllSelectRange(unit.CurrentOwner, TargetRange.Own);
+        var UL = CardGame_Ctrl_Net.Instance.GetAllSelectRange(unit.CurrentOwner, TargetRange.Own);
 
         var Target = UL.Where(n => n.UnitData.UnitMaxHp == UL.Max(n => n.UnitData.UnitMaxHp)).FirstOrDefault();
 

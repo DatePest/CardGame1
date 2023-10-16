@@ -4,32 +4,21 @@ using UnityEngine;
 
 public class CardSpawnManager : NetworkBehaviour
 {
-    //public List<string>[] PlayerDeck, PlayerHand, PlayerDisDeck, PlayerRemoveDeck;
-    //byte? ObserverID;
     [SerializeField]
     [Header("[0]=P1,[1]=P2")]
     CardSpawnScript[] cardSpawnScripts = new CardSpawnScript[2];
     [SerializeField]
     Transform Children;
-    //public CardSpawnScript[] CardSpawnScripts { get => cardSpawnScripts; }
 
+    public int NextCardUid { get; private set; } = 0;
     public Dictionary<byte, CardSpawnScript> Dictionary_CardSpawnScripts { get; private set; } = new();
-    private void Awake()
-    {
-        //PlayerDeck = new List<string>[2];
-        //PlayerHand = new List<string>[2];
-        //PlayerDisDeck = new List<string>[2];
-        //PlayerRemoveDeck = new List<string>[2];
-    }
+
     private void Start()
     {
-
         if (!NetworkManager.Singleton.IsHost || !NetworkManager.Singleton.IsServer)
         {
             Children.localRotation = Quaternion.Euler(180, 180, 0);
-
         }
-      
     }
     
 
@@ -54,32 +43,17 @@ public class CardSpawnManager : NetworkBehaviour
     void InstantiateDeck_ClientRpc() => InstantiateDeck();
     public void InstantiateDeck()
     {
-        int A = 0;
         for (int i = 0; i < CardGameManager.Instance.playerdecks.Length; i++)
         {
             var deck = CardGameManager.Instance.playerdecks[i].Dards;
             foreach (var C in deck)
             {
-                cardSpawnScripts[i].InstantiateGoto(CardsPileEnum.deck, A, C);
-                A++;
+                cardSpawnScripts[i].InstantiateGoto(CardsPileEnum.deck, NextCardUid, C);
+                NextCardUid++;
             }
         }
         
     }
-        //[ServerRpc]//之後重新做成全部同步
-        //public void DeckShuffleAndSynchronizeServerRpc(CardsPileEnum cardsPile)
-        //{
-        //    for (int i = 0; i < cardSpawnScripts.Length; i++)
-        //    {
-        //        cardSpawnScripts[i].Shuffle_Cards(cardsPile);
-        //    }
-        //    for (int i = 0; i < cardSpawnScripts.Length; i++)
-        //    {
-        //        var List = cardSpawnScripts[i].FindDeckStringList(cardsPile);
-        //        var T = NetworkString.GetArray(List);
-        //        SynchronizDeckClientRpc(i, T, cardsPile);
-        //    }
-        //}
         [ServerRpc(RequireOwnership = false)]
     public void ClientSynchronizServerRpc(byte OwnerID, CardsPileEnum Target, bool RunShuffle =false, ServerRpcParams serverRpcParams = default)
     {
@@ -100,8 +74,6 @@ public class CardSpawnManager : NetworkBehaviour
         Dictionary_CardSpawnScripts[OwnerID].SynchronizeCurrentDeck(cardsPile , CardUIDs);
     }
 
-  
-
     [ServerRpc(RequireOwnership = false)]
     public void SpawnHandToDisdeckServerRpc(int CardId, ServerRpcParams serverRpcParams = default)
     {
@@ -116,12 +88,5 @@ public class CardSpawnManager : NetworkBehaviour
         var Script = CardGameManager.Instance.CardSpawnManager.Dictionary_CardSpawnScripts[(byte)clientId];
         Script.FindCardGoto(CardId, From, Goto);
     }
-
-    
-
-
-
-
-
 }
 

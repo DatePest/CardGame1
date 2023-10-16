@@ -9,8 +9,8 @@ public class  A_SelectAorB
     public async Task<AbilityNeedData> UserSelectAorB(AbilityNeedData data)
     {
         T = 0;
-        data.CurrentUsePlayer.PlayerTrigger.SetActiveEX_Select(CardCheckTimesADD,true,true);
-        data.CurrentUsePlayer.PlayerTrigger.SetActiveEX_Select_SetText("A", "B");
+        CardGame_PlayerUIManager.Instance.SetActiveEX_Select(CardCheckTimesADD,true,true);
+        CardGame_PlayerUIManager.Instance.SetActiveEX_Select_SetText("A", "B");
         while (T == 0)
         {
             await Task.Delay(200);

@@ -71,23 +71,6 @@ public class GameNotifyAction_Net  : NetworkBehaviour
     }
 
 
-    //[ClientRpc]
-    //public void StartInstantiateDeckClientRpc( NetworkString[] Dards , int CardSpawnManager, int start)
-    //{
-    //    int A = 0;
-    //    foreach(var a in Dards)
-    //    {
-    //        CardGameManager.Instance.CardSpawnManager.CardSpawnScripts[CardSpawnManager].InstantiateGoto(CardsPileEnum.deck, start+A, Dards[A]);
-    //        A++;
-    //    }
-
-
-    //    // for (int i=0;i< CardGameManager.Instance.CardSpawnManager.CardSpawnScripts.Length; i++)
-    //    //{
-
-    //    //     CardGameManager.Instance.CardSpawnManager.CardSpawnScripts[i].InstantiateGoto_for(CardsPileEnum.deck,DeckConut[i],0);
-    //    //}
-    //}
     [ServerRpc(RequireOwnership = false)]
     public void ExCost_SetValueTsTimesServerRpc(int UseCardUid, bool IsEx1, ServerRpcParams serverRpcParams = default)
     {
@@ -151,7 +134,7 @@ public class GameNotifyAction_Net  : NetworkBehaviour
         UseCheckDisCardClientRpc(clientId, NetData, From, Target);
     }
     [ClientRpc]
-     void UseCheckDisCardClientRpc(ulong clientId, Net_AbilityNeedData NetData, CardsPileEnum From, CardsPileEnum Target)
+      void UseCheckDisCardClientRpc(ulong clientId, Net_AbilityNeedData NetData, CardsPileEnum From, CardsPileEnum Target)
     {
         if (NetworkManager.Singleton.LocalClientId == clientId) return;
         AbilityNeedData data = new (NetData);

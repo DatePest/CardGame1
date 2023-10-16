@@ -10,12 +10,9 @@ using System.Threading.Tasks;
 public class PlayerOBJ : NetworkBehaviour
 {
     [SerializeField] List<Vector3> positions, rotation;
-    [SerializeField] TS_script tS_Script;
-    Coroutine Notify;
     public NetworkVariable<NetworkString> UserName = new("NewPlayer");
     public Camera Usercamera { get; private set; }
     public Canvas canvas { get; private set; }
-    //public NetworkVariable<bool> Net_IsCanSpawn_Start = new();// IsEndDiscardCheck_net = new();
     public int ActionTimes { get; private set; }
     public int EndNeedDiscard { get; private set; }
     public int CurrentHandCardsConut => cardSpawnScript.FindCardsPile(CardsPileEnum.hand).Cards.Count;
@@ -28,40 +25,23 @@ public class PlayerOBJ : NetworkBehaviour
 
     public bool IsCanSpawn, IsEndDiscardCheck; //CanSpawnLook = false
     public bool IsUsingCard { get; private set; }
-    List<CardSolt> EndDiscards_Netid;
     public Dictionary<string, bool> Rule { get; private set; }
     public MouseManager UserMouseManager { get; private set; }
-    [SerializeField] GameObject MyGround, notifyUseCradOBJ;
+    [SerializeField] GameObject MyGround;
     public CardSpawnScript cardSpawnScript { get; private set; }
-    public PleyerAddTrigger PlayerTrigger { get; private set; }
-    public PlayerFingerGuessing PlayerFinger { get; private set; }
-    public CardSelectManager CardSelectManager { get; private set; }
-    public SkillSelectTooltip skillSelectTooltip { get; private set; }
     public bool BanWEx { get; private set; } = false;
     public bool BanDEx { get; private set; } = false;
-    public PlayerStatetip playerTooltip { get; private set; }
     public event Action<AbilityNeedData, SO_SKillAbility> UseStartSkill;
     public event Action<GameObject> UseEXSkill,UseCard;
     public event Action<int> SkillDisCardEvent;
     public int SkillDisCardCount { get; private set; } = 0;
     public AbilityNeedData? BeforeData=null;
-    // Start is called before the first frame update
     void Awake()
     {
         Usercamera = GetComponentInChildren<Camera>();
         canvas = GetComponentInChildren<Canvas>();
         UserMouseManager = GetComponentInChildren<MouseManager>();
-        PlayerTrigger = GetComponentInChildren<PleyerAddTrigger>();
-        PlayerFinger = GetComponentInChildren<PlayerFingerGuessing>();
-        CardSelectManager = GetComponentInChildren<CardSelectManager>();
-        skillSelectTooltip = GetComponentInChildren<SkillSelectTooltip>();
-        playerTooltip = GetComponentInChildren<PlayerStatetip>();
-        PlayerFinger.SetSeletOBJ(this);
-        notifyUseCradOBJ.SetActive(false);
         Rule = new();
-        //ActionTimes = new();
-        //IsCanSpawn = new();
-        //IsUsingCard = new();
         foreach (Enum_Skill_Rule value in Enum.GetValues(typeof(Enum_Skill_Rule)))
         {
             string V = value.ToString();
@@ -72,27 +52,16 @@ public class PlayerOBJ : NetworkBehaviour
     }
     private void Start()
     {
-        //if (NetworkManager.LocalClientId != OwnerClientId)
         if(!IsOwner)
         {
-           
-            PlayerTrigger.enabled = false;
-            //cardSpawnScript.enabled = false;
             UserMouseManager.enabled = false;
-            PlayerFinger.gameObject.SetActive(false);
             Usercamera.gameObject.SetActive(false);
             canvas.gameObject.SetActive(false);
-            skillSelectTooltip.gameObject.SetActive(false);
-            //tS_Script.gameObject.SetActive(false);
             return;
         }
         SetCamera((int)OwnerClientId);
-        tS_Script.gameObject.SetActive(true);
-        tS_Script.TS_Add();
         CardGameManager.Instance.SetmyPlayer(this);
-        //Net_IsCanSpawn_Start.OnValueChanged += IsStartValueChanged;
-        CardGameManager.Instance.GameNotifyAction_Net.CardUse += notifyUseCrad;
-        CardGameManager.Instance.GameNotifyAction_Net.Unit += notifyUnitSkill;
+       
     }
     public void CardSpawnScript_FindSetLoacl()
     {
@@ -100,12 +69,6 @@ public class PlayerOBJ : NetworkBehaviour
         if (IsOwner)
         cardSpawnScript.IsOwner = true;
     }
-    //private void IsStartValueChanged(bool previousValue, bool newValue)
-    //{
-    //    IsCanSpawn = newValue;
-    //    PlayerTrigger.SetActiveEndButton(newValue);
-    //    if (IsCanSpawn)  ActionTimes = 1;
-    //}
     public void SetCurrentUseCard(CardSolt c,bool b)
     {
         CurrentUseCard = c;
@@ -114,7 +77,7 @@ public class PlayerOBJ : NetworkBehaviour
     public void SetExCostDown_Zero()
     {
         ExCostDown = 0;
-        playerTooltip.SetCostDown(ExCostDown);
+        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDown(ExCostDown);
     }
     public void UseStartSkillAction(AbilityNeedData data, SO_SKillAbility sObj_SKill)
     {
@@ -129,12 +92,12 @@ public class PlayerOBJ : NetworkBehaviour
     public void SetExCostDown(int i)
     {
         ExCostDown += i;
-        playerTooltip.SetCostDown(ExCostDown);
+        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDown(ExCostDown);
     }
     public void SetExCostDownKeepRound(int i)
     {
         ExCostDownKeepRound += i;
-        playerTooltip.SetCostDownRound(ExCostDownKeepRound);
+        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDownRound(ExCostDownKeepRound);
     }
     public void SetRoundStartAddedCard(int i)
     {
@@ -156,23 +119,13 @@ public class PlayerOBJ : NetworkBehaviour
         ExCostDown = 0;
         SkillDisCardCount = 0;
         ExCostDownKeepRound = 0;
-        playerTooltip.SetActionTime(ActionTimes);
-        playerTooltip.SetCostDown(ExCostDown);
-        playerTooltip.SetCostDownRound(ExCostDownKeepRound);
+        CardGameManager.Instance.GameSceneUI.playerTooltip.SetActionTime(ActionTimes);
+        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDown(ExCostDown);
+        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDownRound(ExCostDownKeepRound);
         BanWEx = false;
         BanDEx = false;
 
     }
-    //[ServerRpc(RequireOwnership = false)]
-    //public void SetCurrentResetServerRpc(ServerRpcParams serverRpcParams = default)
-    //{
-    //    SetCurrentResetClientRpc();
-    //}
-    //[ClientRpc]
-    //public void SetCurrentResetClientRpc()
-    //{
-    //    SetCurrentReset();
-    //}
     [ServerRpc(RequireOwnership = false)]
     public void Event_EXSkillUse_ServerRpc(NetworkBehaviourReference playerobj ,int Cardid,CardsPileEnum cardsPile,ServerRpcParams serverRpcParams = default)
     {
@@ -184,7 +137,6 @@ public class PlayerOBJ : NetworkBehaviour
         playerobj.TryGet(out PlayerOBJ P);
         var C =P.cardSpawnScript.FindCard(Cardid, cardsPile);
         UseEXSkill?.Invoke(C);
-        
     }
 
     public void Event_UseCard(CardSolt card)
@@ -243,10 +195,7 @@ public class PlayerOBJ : NetworkBehaviour
         SetRuleServerRpc(S, Bool, NetworkObjectId);
     }
     [ServerRpc(RequireOwnership = false)]
-    public void SetRuleServerRpc(NetworkString s, bool b, ulong currentObjId)
-    {
-        SetRuleClientRpc(s, b, currentObjId);
-    }
+    public void SetRuleServerRpc(NetworkString s, bool b, ulong currentObjId) => SetRuleClientRpc(s, b, currentObjId);
     [ClientRpc]
     public void SetRuleClientRpc(NetworkString S, bool b, ulong currentObjId)
     {
@@ -280,62 +229,20 @@ public class PlayerOBJ : NetworkBehaviour
         //CanSpawnLook == true&&
         if ( IsCanSpawn == false) return;
         ActionTimes += i;
-        playerTooltip.SetActionTime(ActionTimes);
+        CardGameManager.Instance.GameSceneUI.playerTooltip.SetActionTime(ActionTimes);
         if (ActionTimes <= 0)
         {
             IsCanSpawn = false;
         }
         else
             IsCanSpawn = true;
-        //Debug.Log("ActionTimes" + ActionTimes);
-        //Debug.Log("IsCanSpawn" + IsCanSpawn);
     }
     public void SetActionTimes(int i)
     {
         ActionTimes = i;
-        playerTooltip.SetActionTime(ActionTimes);
+        CardGameManager.Instance.GameSceneUI.playerTooltip.SetActionTime(ActionTimes);
     }
-    private void OnDisable()
-    {
-        if (!IsOwner || CardGameManager.Instance == null) return;
-        CardGameManager.Instance.GameNotifyAction_Net.CardUse -= notifyUseCrad;
-        CardGameManager.Instance.GameNotifyAction_Net.Unit -= notifyUnitSkill;
-    }
-
-    private void notifyUnitSkill(Unit U, float Time)
-    {
-        notifyUseCradOBJ.SetActive(true);
-        var T = notifyUseCradOBJ.GetComponent<RawImage>();
-        if(U.UnitData.cardArt.texture!=null)
-        T.texture = U.UnitData.cardArt.texture;
-        if (Notify != null)
-        {
-            StopCoroutine(Notify);
-        }
-        Notify = StartCoroutine(notifyUseCradWait(Time));
-    }
-
-    public void notifyUseCrad(CardSolt currentCradslot, float Time)
-    {
-        notifyUseCradOBJ.SetActive(true);
-        var T =notifyUseCradOBJ.GetComponent<RawImage>();
-        if(currentCradslot.CardSO.cardArt != null)
-        T.texture = currentCradslot.CardSO.cardArt.texture;
-        if(Notify != null)
-        {
-            StopCoroutine(Notify);
-        }
-        Notify = StartCoroutine(notifyUseCradWait(Time));
-       
-    }
-
-    IEnumerator notifyUseCradWait(float T)
-    {
-        yield return new WaitForSeconds(T);
-        notifyUseCradOBJ.SetActive(false);
-        Notify = null;
-    }
-
+    
 
     [ClientRpc]
     public void RoundEnd_ClientRpc(NetworkObjectReference networkObject )
@@ -346,7 +253,7 @@ public class PlayerOBJ : NetworkBehaviour
         if (CurrentHandCardsConut > 6) TargetDiscardCards = CurrentHandCardsConut-6;
         if (TargetDiscardCards < EndNeedDiscard) TargetDiscardCards = EndNeedDiscard;
         if(TargetDiscardCards ==0) 
-            CardGameManager.Instance.GameTurnSystem_Net.GameStateUpdateServerRpc();
+            CardGameManager.Instance.CardGame_Ctrl.GameStateUpdateServerRpc();
         else
         RoundEndRun(TargetDiscardCards,false);
     }
@@ -372,7 +279,7 @@ public class PlayerOBJ : NetworkBehaviour
                 }
                 else
                 {
-                    var CS = CardSelectManager;
+                    var CS = CardGame_PlayerUIManager.Instance.Get_CardSelectManager();
                     if (SearchEndCards.Count < Times)
                         CS.DisplayStart_1(SearchEndCards, SearchEndCards.Count);
                     else
@@ -393,19 +300,12 @@ public class PlayerOBJ : NetworkBehaviour
                 }
             }
         }
-        CardGameManager.Instance.GameTurnSystem_Net.GameStateUpdateServerRpc();
+        CardGameManager.Instance.CardGame_Ctrl.GameStateUpdateServerRpc();
 
     }
     public void SetEndDiscard(int i)
     {
         EndNeedDiscard = i;
     }
-    
-    public void ReturnDiscardID(CardSolt cardSolt)
-    {
-        EndDiscards_Netid.Add(cardSolt);
-    }
-
-    
        
 }

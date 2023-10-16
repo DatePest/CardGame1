@@ -10,7 +10,7 @@ public class UseCheck_AnyUnitHaveBuff : SkillUseCheckBase
     public override async Task<CheckDate> UseCheck(AbilityNeedData data, CardSolt cardSolt, List<SO_CardCheckType> DisCard_Extra_SkillCheckList = null)
     {
         var checkDate = new CheckDate();
-        var UL = CardGameManager.Instance.GetAllSelectRange(data, target);
+        var UL = CardGame_Ctrl_Net.Instance.GetAllSelectRange(data, target);
         foreach(var a in UL)
         {
             Debug.Log(a.UnitData.UID);

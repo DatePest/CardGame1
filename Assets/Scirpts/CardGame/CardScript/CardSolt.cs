@@ -9,9 +9,7 @@ using System;
 
 public class CardSolt : MonoBehaviour
 {
-    [SerializeField] GameObject ChidRoot;
-    [SerializeField] Image CardArt, CarAttributeTypeIcon, CardBack, CardAbilityFrame ,Useing,BanArt;
-    [SerializeField] TextMeshProUGUI CardName, CardDes1;
+    CardDisplay MyCardDisplay;
     public CardSoltInThe CardCurrentInThe { get; private set; } = CardSoltInThe.Null;
     public CardSoltInThe CardBeforeInThe { get; private set; } = CardSoltInThe.Null;
     public bool IsBan { get; private set; } = false;
@@ -25,12 +23,7 @@ public class CardSolt : MonoBehaviour
     //Coroutine UseCardSkill;
     public SO_CardBase CardSO { get; private set; }
     public PlayerOBJ CurrentPlayer;//CurrentPlayer
-
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        ChidRoot.SetActive(false);
-    }
+    
     public void SetCardSoltInThe(CardsPileEnum cardsPile)
     {
         CardBeforeInThe = CardCurrentInThe;
@@ -64,6 +57,11 @@ public class CardSolt : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        MyCardDisplay = GetComponentInChildren<CardDisplay>();
+    }
+
     public PlayerOBJ CurrentUsePlayer { get
         {
             if (CurrentPlayer == null)
@@ -92,60 +90,63 @@ public class CardSolt : MonoBehaviour
             return CurrentPlayer;
         }//private set { CurrentPlayer = value; }
         }
-    public void GetToSet_Enabled(string s)
-    {
-        ChidRoot.SetActive(true);
-        CardName.text = s;
-    }
-    public void SetOwner(bool T)
-    {
-        IsOwner = T;
-    }
-    public void SetCardUid(int T)
-    {
-        CardUid = T;
-    }
+
+    #region CardDisPlay
+    
     public void RemoveCardSO()
     {
-        ChidRoot.SetActive(true);
         CardSO = null;
-        CardArt.sprite =null;
-        CardName.text = null;
-        CardDes1.text = null;
-        CardAbilityFrame.sprite = null;
-        CarAttributeTypeIcon.sprite = null;
-        CurrentPlayer = null;
+        MyCardDisplay.RemoveCardDisplay();
         //OwnerID = null;
-        ChidRoot.SetActive(false);
+    }
+    public void DisEnabledCard()
+    {
+        MyCardDisplay.Set_ChidRootActive(false);
     }
     public void UpdateCardSO(SO_CardBase Card)
     {
         CardSO = Card;
-        CardArt.sprite = Card.cardArt;
-        CardName.text = Card.cardname;
-        CardDes1.text = Card.SkillDepiction;
-        //CardDes2.text = Card.SkillDepiction;
-        CardAbilityFrame.sprite = GameManager.Instance.DataBase.CardAbilityFrame.GetCardAbilityFrame(Card.CardAttributesType);
-        CarAttributeTypeIcon.sprite = GameManager.Instance.DataBase.CardAbilityFrame.GetcardAbilityIcons(Card.CardAttributesType);
+        MyCardDisplay.SetCardDisplay(CardSO);
     }
     public void SetCardSO(SO_CardBase Card )
     {
-        ChidRoot.SetActive(true);
+        MyCardDisplay.Set_ChidRootActive(true);
         UpdateCardSO(Card);
         
         if(CardCurrentInThe == CardSoltInThe.Indeck)
-            ChidRoot.SetActive(false);
+            MyCardDisplay.Set_ChidRootActive(false);
+    }
+    public void EnableCard(bool IsAllEnable = false)
+    {
+        DisEnabledCard();
+        if (IsAllEnable)
+        {
+            MyCardDisplay.Set_ChidRootActive(true);
+            return;
+        }
+        if (IsOwner)
+        {
+            MyCardDisplay.Set_ChidRootActive(true);
+        }
+        // ChidRoot.SetActive(true); //TestOnly  Allopen
     }
 
     public void SetIsBan(bool b)
     {
         IsBan = b;
-        if (IsBan == true)
-            BanArt.gameObject.SetActive(true);
-        else
-            BanArt.gameObject.SetActive(false);
+        MyCardDisplay.Set_IsBanArt(b);
     }
+
+    public void SetUseArt(bool b)
+    {
+        CardUseingLook = b;
+        MyCardDisplay.Set_UseArt(b);
+    }
+    #endregion
+    public void SetOwner(bool T) => IsOwner = T;
+    public void SetCardUid(int T) => CardUid = T;
     public void SetOwnerID( byte id) { OwnerID = id; }
+    public void SetEndToRomve(bool b) => EndToRomve=b;
 
     public void NetUseStartSkill(Net_AbilityNeedData Netdata)
     {
@@ -217,14 +218,11 @@ public class CardSolt : MonoBehaviour
             }
     }
 
-    public void SetEndToRomve(bool b)
-    {
-        EndToRomve = b;
-    }
+   
     public void CardSolt_UseEndToDisdeck()
     {
         CurrentUsePlayer.BeforeData = null;
-        Useing.gameObject.SetActive(false);
+        SetUseArt(false);
         CurrentUsePlayer.AddActionTimes(-1);
         if (EndToRomve)
         {
@@ -240,37 +238,17 @@ public class CardSolt : MonoBehaviour
             CurrentUsePlayer.cardSpawnScript.CardsPileChange(gameObject, CurrentInCardsPile(), CardsPileEnum.disdeck);
            
         }
-            
-       
         CurrentUsePlayer.SetCurrentRoundUseCardsConut(1);
-        CardUseingLook = false;
+        //CardUseingLook = false;
         CurrentUsePlayer.SetCurrentUseCard(null,false);
     }
-    public void DisEnabledCard()
-    {
-        ChidRoot.SetActive(false);
-    }
-    public void EnableCard(bool IsAllEnable =false)
-    {
-        DisEnabledCard();
-        if (IsAllEnable)
-        {
-            ChidRoot.SetActive(true);
-            return;
-        }
-        if (IsOwner)
-        {
-            ChidRoot.SetActive(true);
-        }
-       // ChidRoot.SetActive(true); //TestOnly  Allopen
-    }
-    
+   
     public void UseDisCardAbilities()
     {
         if (CardSO == null) return;
         if (DisCardUseingLook == true) return;
         if (CardSO.DiscardAbilities.Count < 1) return;
-        Debug.Log("UseDisCardAbilities");
+        //Debug.Log("UseDisCardAbilities");
         StartCoroutine(Card_DisSkill());
     }
     public void ExCost_SetValueTsTimes(bool IsEx1)
@@ -280,9 +258,6 @@ public class CardSolt : MonoBehaviour
             i = Math.Max (CardSO.EX1_Wex_Cost - i,0);
         else
             i = Math.Max(CardSO.EX2_Dex_Cost - i, 0); 
-        //if (i < 1) i = 0;
-
-
         if (IsEx1)
         CardGameManager.Instance.Ts_Manager.SetValueTsTimes(+ i);
         else
@@ -290,14 +265,8 @@ public class CardSolt : MonoBehaviour
         CurrentUsePlayer.SetExCostDown_Zero();
 
     }
-    public void CardCheckTimesADD(int i)
-    {
-        UseCardCheckTimes += i;
-    }
-    public void DisCardCheckTimesADD(int i)
-    {
-        DisCardCheckTimes += i;
-    }
+    public void CardCheckTimesADD(int i)=> UseCardCheckTimes += i;
+    public void DisCardCheckTimesADD(int i) => DisCardCheckTimes += i;
 
     IEnumerator Card_DisSkill()
     {
@@ -338,26 +307,20 @@ public class CardSolt : MonoBehaviour
     {
         if (CardGameManager.Instance.NeedWait == true) return;
         if (!IsOwner) return;
-        if (CurrentUsePlayer.CardSelectManager.IsDisplay() == true) return;
-        if (CurrentUsePlayer.PlayerTrigger.TS_SelectDisplayIsActive() == true) return;
+        if (CardGame_PlayerUIManager.Instance.Get_CardSelectManager().IsDisplay() == true) return;
+        if (CardGame_PlayerUIManager.Instance.TS_SelectDisplayIsActive() == true) return;
         if (!CurrentUsePlayer.cardSpawnScript.SpawnEnd) return;
         if (CardSO == null) return;
         if (CardCurrentInThe != CardSoltInThe.InHand) return;
         if (CurrentUsePlayer.IsCanSpawn != true || CurrentUsePlayer.IsUsingCard != false) return;
-        CardUseingLook = true;
+        //CardUseingLook = true;
         CurrentUsePlayer.SetCurrentUseCard(this ,true);
-        Useing.gameObject.SetActive(true);
+        SetUseArt(true);
         StartCoroutine(Card());
     }
 
-    bool GetCanEx1Check()
-    {
-        return (CurrentUsePlayer.BanWEx || CardSO.CanEx1Check());
-    }
-    bool GetCanEx2Check()
-    {
-        return (CurrentUsePlayer.BanDEx || CardSO.CanEx2Check());
-    }
+    bool GetCanEx1Check() => (CurrentUsePlayer.BanWEx || CardSO.CanEx1Check());
+    bool GetCanEx2Check() => (CurrentUsePlayer.BanDEx || CardSO.CanEx2Check());
     IEnumerator Card()
     {
         int CompletedNeedCheckTims, NowCheckTims;
@@ -379,7 +342,7 @@ public class CardSolt : MonoBehaviour
                 foreach (var a in CardSO.Abilities_1)
                 {
                     NowCheckTims++;
-                    if (a.Skill_Rule != null)
+                    if (a.Skill_Rule != Enum_Skill_Rule.Null)
                     {
                         if (!CurrentUsePlayer.CheckRule((Enum_Skill_Rule)a.Skill_Rule))
                         {
@@ -405,7 +368,7 @@ public class CardSolt : MonoBehaviour
         if (EX_Check == CradUseing.Waiting)
         {
             UseCardCheckTimes = 0;
-            CurrentUsePlayer.PlayerTrigger.Card_EX_Button(CardCheckTimesADD);
+            CardGame_PlayerUIManager.Instance.Card_EX_Button(CardCheckTimesADD);
             while (UseCardCheckTimes == 0)
             {
                 yield return new WaitForSeconds(1f);
@@ -413,8 +376,8 @@ public class CardSolt : MonoBehaviour
             if (UseCardCheckTimes == 1) // turn
             {
                 UseCardCheckTimes = 0;
-                CurrentUsePlayer.PlayerTrigger.SetActiveEX_Select(CardCheckTimesADD, GetCanEx1Check(), GetCanEx2Check());
-                CurrentUsePlayer.PlayerTrigger.SetActiveEX_Select_SetText("Wex", "Dex");
+                CardGame_PlayerUIManager.Instance.SetActiveEX_Select(CardCheckTimesADD, GetCanEx1Check(), GetCanEx2Check());
+                CardGame_PlayerUIManager.Instance.SetActiveEX_Select_SetText("Wex", "Dex");
                 while (UseCardCheckTimes == 0)
                 {
                     yield return new WaitForSeconds(0f);
@@ -459,7 +422,7 @@ public class CardSolt : MonoBehaviour
                 foreach (var a in T)
                 {
                     NowCheckTims++;
-                    if (a.Skill_Rule != null)
+                    if (a.Skill_Rule != Enum_Skill_Rule.Null)
                         if (!CurrentUsePlayer.CheckRule((Enum_Skill_Rule)a.Skill_Rule))
                         {
                             UseCardCheckTimes++;
@@ -473,22 +436,10 @@ public class CardSolt : MonoBehaviour
                     }
                 }
             }
-
             CardGameManager.Instance.GameNotifyAction_Net.CardExUseEndServerRpc();
         }
         CardSolt_UseEndToDisdeck();
     }
-
-    
-
-    public void SelectDiscard()
-    {
-        if (!CurrentUsePlayer.IsEndDiscardCheck) return;
-
-        //CurrentHasPlayer.cardSpawnScript.UseEndToDisdeck(this);
-        CurrentUsePlayer.ReturnDiscardID(this);
-    }
-
 }
 public enum CardSoltInThe
 {

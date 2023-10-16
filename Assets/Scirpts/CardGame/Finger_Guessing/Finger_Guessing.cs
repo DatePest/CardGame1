@@ -6,12 +6,14 @@ using Unity.Netcode;
 
 public class Finger_Guessing : NetworkBehaviour
 {
-     NetworkList<Guessing_Data> Finger_Guessing_Data  ;
-    //public event Action<Dictionary<ulong, int>> Finger_GuessingNotify ;
-
+     NetworkList<Guessing_Data> Finger_Guessing_Data ;
+    [SerializeField] PlayerFingerGuessing playerFinger;
+    public PlayerFingerGuessing PlayerFinger => playerFinger;
     private void Awake()
     {
         Finger_Guessing_Data = new();
+        playerFinger = Instantiate(playerFinger, transform);
+        PlayerFinger.SetSeletOBJ();
     }
     public void  StartFinger_Guessing()
     {
@@ -24,10 +26,7 @@ public class Finger_Guessing : NetworkBehaviour
      IEnumerator Run()
     {
         Finger_Guessing_Data.Clear();
-        //foreach(var a in NetworkManager.Singleton.ConnectedClients)
-        //{
-        //    a.Value.PlayerObject.
-        //}
+       
         StartFinger_GuessingClientRpc();
         while (Finger_Guessing_Data.Count < CardGameManager.Instance.Players.Count)
         {
@@ -100,13 +99,13 @@ public class Finger_Guessing : NetworkBehaviour
                 En = a.Select;
             }
         }
-        CardGameManager.Instance.MyPlayer.PlayerFinger.FingerGuessingResult(Own, En);
+        PlayerFinger.FingerGuessingResult(Own, En);
 
     }
     [ClientRpc]
     void StartFinger_GuessingClientRpc()
     {
-        CardGameManager.Instance.MyPlayer.PlayerFinger.FingerGuessingStart();
+        PlayerFinger.FingerGuessingStart();
     }
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayersOrderServerRpc( bool b , ServerRpcParams serverRpcParams = default)
@@ -125,7 +124,7 @@ public class Finger_Guessing : NetworkBehaviour
         //Debug.Log("CheckSelectOrderClientRpcWin" + ID);
         if (ID == NetworkManager.Singleton.LocalClientId)
         {
-            CardGameManager.Instance.MyPlayer.PlayerFinger.RunSelectOrder();
+            PlayerFinger.RunSelectOrder();
         }
        
     }

@@ -22,7 +22,7 @@ public class Round_Battle : Round_IState
     {
         Round_ActionInvoke();
         if (Ui == null)
-            Ui = CardGameManager.Instance.BattleUI;
+            Ui = CardGameManager.Instance.GameSceneUI.BattleUI;
         CurrentPlayer = null;
         if (NetworkManager.Singleton.IsHost)
         {
@@ -34,7 +34,7 @@ public class Round_Battle : Round_IState
                     Ui.CurrnetAtk(i);
                     Battle_Actions[i].AtkAction();
                 }
-            CardGameManager.Instance.GameTurnSystem_Net.GameStateUpdateServerRpc();
+            CardGameManager.Instance.CardGame_Ctrl.GameStateUpdateServerRpc();
         }
         //CardGameManager.Instance.GameTurnSystem_Net.BattleEnd_ServerRpc();
 

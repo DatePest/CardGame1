@@ -36,7 +36,7 @@ public class Skill_UseCardEvent : PassiveRoundEventBase
         }
         else
         {
-            TargetObj = CardGameManager.Instance.GetEnemyPlayer(Data.Value.CurrentUsePlayer.OwnerClientId);
+            TargetObj = CardGame_Ctrl_Net.Instance.GetEnemyPlayer(Data.Value.CurrentUsePlayer.OwnerClientId);
         }
         TargetObj.UseCard += Unit_Event;
         CardGameManager.Instance.GameTurnSystem.GetRoundiState(RestTime, ref ResetIState);

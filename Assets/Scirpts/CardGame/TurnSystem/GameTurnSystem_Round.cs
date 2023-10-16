@@ -36,9 +36,10 @@ public class GameTurnSystem_Round : I_StatePattern
     }
     public override void StateExit()
     {
-        foreach(var a in Players)
+        CardGame_PlayerUIManager.Instance.SetActiveEndButton(false);
+        foreach (var a in Players)
         {
-            a.PlayerTrigger.SetActiveEndButton(false);
+            
             a.SetCurrentReset();
             a.IsCanSpawn = false;
         }
@@ -65,7 +66,7 @@ public class GameTurnSystem_Round : I_StatePattern
 
     void CurrentStateEnter()
     {
-        CardGameManager.Instance.SystemStateUIText.SetTMPro(CurrentRound_State.GetType().Name);
+        CardGameManager.Instance.GameSceneUI.GameStateUIText.SetTMPro(CurrentRound_State.GetType().Name);
         CurrentRound_State.StateEnter();
        // Debug.Log("" + CurrentRound_State.GetType().Name);
         
@@ -94,7 +95,7 @@ public class GameTurnSystem_Round : I_StatePattern
                 break;
             if(S is Round_Battle)
             {
-                gameManagerInstance.BattleUI.BattleShomScreen(ref S);
+                gameManagerInstance.GameSceneUI.BattleUI.BattleShomScreen(ref S);
             }
             S = S.NextState;
         }

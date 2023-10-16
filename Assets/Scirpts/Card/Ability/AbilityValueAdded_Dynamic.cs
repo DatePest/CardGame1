@@ -20,7 +20,7 @@ public class AbilityValueAdded_Dynamic: AbilityBase
 
     public override void RemoveAbility(SO_Unit unit)
     {
-        AbilityBaseAPI.GetAbilitySetFunc(unit, AddedTimes, AddedTarget);
+        AbilityBaseAPI.GetAbilitySetFunc(unit, -AddedTimes, AddedTarget);
         AddedTimes = 0;
     }
     public override void Stack(bool IsAdd)

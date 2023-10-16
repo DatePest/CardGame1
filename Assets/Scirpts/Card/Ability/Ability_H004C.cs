@@ -14,7 +14,7 @@ public class Ability_H004C : AbilityBase
     public override void AddUseAbility(SO_Unit unit)
     {
         TargetUnit = new();
-        var Tamp = CardGameManager.Instance.GetAllSelectRange(unit.CurrentOwner, TargetRange.Enemy);
+        var Tamp = CardGame_Ctrl_Net.Instance.GetAllSelectRange(unit.CurrentOwner, TargetRange.Enemy);
         foreach(var a in Tamp)
         {
             if (a.UnitData.UnitTpye != UnitTpye.Barrier)

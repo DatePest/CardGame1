@@ -16,7 +16,7 @@ public sealed class Skill_AddBuff_Special_C013 : Skill_NotTarget_All
     {
         int Times = 0;
         //var UList = CardGameManager.Instance.GetAllUnit();
-        var UList = CardGameManager.Instance.GetAllSelectRange(data, target);
+        var UList = CardGame_Ctrl_Net.Instance.GetAllSelectRange(data, target);
         Unit Target = null;
         foreach (var u in UList)
         {

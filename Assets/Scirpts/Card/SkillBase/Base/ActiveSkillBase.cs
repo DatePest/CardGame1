@@ -171,7 +171,7 @@ public abstract class ActiveSkillBase : SO_SKillAbility
 
     public MapSolt RandomMapTarget(PlayerOBJ CardUsePlayer, TargetRange RangeNumber, MapSelectType selectType, MapSelectCondition Condition)
     {
-        var List = CardGameManager.Instance.GetAllMapSolt();
+        var List = CardGame_Ctrl_Net.Instance.GetAllMapSolt();
         var NList = new List<MapSolt>();
         foreach (var a in List)
         {
@@ -198,8 +198,8 @@ public abstract class ActiveSkillBase : SO_SKillAbility
 
     public MapSolt WaitMapSolt(AbilityNeedData data, TargetRange RangeNumber, MapSelectCondition condition)
     {
-        if (!data.CurrentUsePlayer.skillSelectTooltip.IsDisplayIsActive())
-            data.CurrentUsePlayer.skillSelectTooltip.Show_Set(SelectTargetTpye.Map, RangeNumber);
+        if (!CardGame_PlayerUIManager.Instance.Get_SkillselectTooltip().IsDisplayIsActive())
+            CardGame_PlayerUIManager.Instance.Get_SkillselectTooltip().Show_Set(SelectTargetTpye.Map, RangeNumber);
         if (data.CurrentUsePlayer.UserMouseManager.CurrnetHits != null)
         {
             foreach (var result in data.CurrentUsePlayer.UserMouseManager.CurrnetHits)
@@ -208,7 +208,7 @@ public abstract class ActiveSkillBase : SO_SKillAbility
                 {
                     if (T != null && MapTargetRangeCheck(data.CurrentUsePlayer, T, RangeNumber)&& MapCheck(T, condition))
                     {
-                        data.CurrentUsePlayer.skillSelectTooltip.Close();
+                        CardGame_PlayerUIManager.Instance.Get_SkillselectTooltip().Close();
                         data.CurrentUsePlayer.UserMouseManager.CurrnetHits = null;
                         return T;
                     }
@@ -291,7 +291,7 @@ public abstract class ActiveSkillBase : SO_SKillAbility
 
     protected Unit RandomUnitTarget(PlayerOBJ CardUsePlayer, TargetRange RangeNumber, UnitSortSelectType selectType, CheckSortTpye SortTpye, List<UnitCheckBase> unitChecks1)
     {
-        var Units = CardGameManager.Instance.GetAllSelectRange(CardUsePlayer, RangeNumber);
+        var Units = CardGame_Ctrl_Net.Instance.GetAllSelectRange(CardUsePlayer, RangeNumber);
         var LastList = new List<Unit>();
         foreach (var a in Units)
         {
@@ -323,8 +323,8 @@ public abstract class ActiveSkillBase : SO_SKillAbility
 
     protected Unit WaitUnit(AbilityNeedData data, TargetRange RangeNumber, UnitTypeRange unitType , List<UnitCheckBase> Checks)
     {
-        if (!data.CurrentUsePlayer.skillSelectTooltip.IsDisplayIsActive())
-            data.CurrentUsePlayer.skillSelectTooltip.Show_Set(SelectTargetTpye.Unit, RangeNumber);
+        if (!CardGame_PlayerUIManager.Instance.Get_SkillselectTooltip().IsDisplayIsActive())
+            CardGame_PlayerUIManager.Instance.Get_SkillselectTooltip().Show_Set(SelectTargetTpye.Unit, RangeNumber);
         if (data.CurrentUsePlayer.UserMouseManager.CurrnetHits != null)
         {
             foreach (var result in data.CurrentUsePlayer.UserMouseManager.CurrnetHits)
@@ -341,7 +341,7 @@ public abstract class ActiveSkillBase : SO_SKillAbility
                         {
                             if(data.UserTarget.UnitData.Focus == true)
                             {
-                                data.CurrentUsePlayer.skillSelectTooltip.Close();
+                                CardGame_PlayerUIManager.Instance.Get_SkillselectTooltip().Close();
                                 data.CurrentUsePlayer.UserMouseManager.CurrnetHits = null;
                                 return T.GetUnit();
                             }
@@ -359,7 +359,7 @@ public abstract class ActiveSkillBase : SO_SKillAbility
                                 {
                                     if (TempU == a)
                                     {
-                                        data.CurrentUsePlayer.skillSelectTooltip.Close();
+                                        CardGame_PlayerUIManager.Instance.Get_SkillselectTooltip().Close();
                                         data.CurrentUsePlayer.UserMouseManager.CurrnetHits = null;
                                         return TempU;
                                     }
@@ -380,7 +380,7 @@ public abstract class ActiveSkillBase : SO_SKillAbility
                         if( UnitTypeCheck(U, unitType) && Ccheck==true)
                         {
                             data.CurrentUsePlayer.UserMouseManager.CurrnetHits = null;
-                            data.CurrentUsePlayer.skillSelectTooltip.Close();
+                            CardGame_PlayerUIManager.Instance.Get_SkillselectTooltip().Close();
                             return U;
                         }
                     }

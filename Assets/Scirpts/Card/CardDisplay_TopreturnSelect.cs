@@ -18,7 +18,7 @@ public class CardDisplay_TopreturnSelect : CardDisplay_CardSelect
     {
         if (CardgameObject == null) return;
         var Card = CardgameObject.GetComponentInChildren<CardSolt>();
-        gameObject.GetComponentInParent<CardSelectManager>().SelectReturn_2(Card.CardUid,this, MyNubmer); ;
+        gameObject.GetComponentInParent<CardSelectUI>().SelectReturn_2(Card.CardUid,this, MyNubmer); ;
     }
     public void SetuGUI(int i)
     {

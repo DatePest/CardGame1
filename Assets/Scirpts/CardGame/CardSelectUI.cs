@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class CardSelectManager : MonoBehaviour
+public class CardSelectUI : MonoBehaviour
 {
 
     [SerializeField] ObjPool pool_1, pool_2;

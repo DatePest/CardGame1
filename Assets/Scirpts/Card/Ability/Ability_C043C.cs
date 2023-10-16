@@ -25,7 +25,7 @@ public class Ability_C043C : AttackStart_Event
     }
     SO_Unit FindHero(SO_Unit U)
     {
-        var Ul = CardGameManager.Instance.GetAllSelectRange(U.CurrentOwner, TargetRange.Own);
+        var Ul = CardGame_Ctrl_Net.Instance.GetAllSelectRange(U.CurrentOwner, TargetRange.Own);
 
         foreach(var a in Ul)
         {

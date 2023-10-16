@@ -36,7 +36,7 @@ public sealed class Attack_All_ToTarget : AttatkBase
 
     public override List<MapSolt> GetMaps()
     {
-        return CardGameManager.Instance.GetUserEnemyMapArea(SkillData.UserTarget).GetAllMapSolt();
+        return CardGame_Ctrl_Net.Instance.GetUserEnemyMapArea(SkillData.UserTarget).GetAllMapSolt();
     }
 
     public override void UIShow(BattleActionPool pool)

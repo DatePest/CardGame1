@@ -6,8 +6,6 @@ using Unity.Netcode;
 
 public class TS_Manager : MonoBehaviour
 {
-    //public NetworkVariable<int> NetTsTimes; //NetTsTimes=DEX
-
     /// TsTimes < 5 = WEX (îíêF)  TsTimes > 5 =DEX  (¸KêF)  TsTimes=DEX(¸KêF)  
     public int TsTimes { get; private set; }
     public event Action<int> TS_UpData_Action;
@@ -37,19 +35,8 @@ public class TS_Manager : MonoBehaviour
         else if (TsTimes > 10) TsTimes = 10;
         StateUIText.SetTMPro(TS_NowTpye.ToString());
         TS_UpData_Action?.Invoke(TsTimes);
-        //Debug.Log("TS_NowTpye__" + TS_NowTpye);
+        
     }
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.W))
-    //    {
-    //        SetValueTsTimes(-1);
-    //    }
-    //    if (Input.GetKeyDown(KeyCode.E))
-    //    {
-    //        SetValueTsTimes(+1);
-    //    }
-    //}
 }
 public enum TS_Tpye
 {

@@ -14,7 +14,7 @@ public sealed class Skill_Purify_All : Skill_NotTarget_All
     }
     public override async Task UseSkill(AbilityNeedData data)
     {
-        var UList = CardGameManager.Instance.GetAllSelectRange(data, target);
+        var UList = CardGame_Ctrl_Net.Instance.GetAllSelectRange(data, target);
 
         foreach (var u in UList)
         {

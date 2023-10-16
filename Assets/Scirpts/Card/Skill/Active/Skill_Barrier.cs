@@ -17,7 +17,7 @@ public sealed class Skill_Barrier : Skill_NeedMap
     {
         if (!CardGameManager.Instance.IsSingleplayer && NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsHost)
         {
-            CardGameManager.Instance.CreateUnit_ServerRpc(unit.UintID, unitTpye, (int)data.MapSolt.PlayerOwnerNumberID, data.MapSolt.MapSoltID);
+            CardGame_Ctrl_Net.Instance.CreateUnit_ServerRpc(unit.UintID, unitTpye, (int)data.MapSolt.PlayerOwnerNumberID, data.MapSolt.MapSoltID);
         }
         await Task.Delay(300);
     }

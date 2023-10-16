@@ -34,7 +34,7 @@ public abstract class Skill_NotTarget_TS : ActiveSkillBase
     {
         if (ManualSelect == true)
         {
-            data.CurrentUsePlayer.PlayerTrigger.SetActiveTS_Select(SetTSskillType, IsCanNull);
+            CardGame_PlayerUIManager.Instance.SetActiveTS_Select(SetTSskillType, IsCanNull);
             while (ManualSelect_TSType == null)
             {
                 await Task.Delay(300);

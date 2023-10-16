@@ -22,7 +22,7 @@ public sealed class Skill_ALL_UnitIF : Skill_NotTarget_All
     public override async Task UseSkill(AbilityNeedData data)
     {
         //Debug.Log(AbilityID);
-        var UList = CardGameManager.Instance.GetAllSelectRange(data, target);
+        var UList = CardGame_Ctrl_Net.Instance.GetAllSelectRange(data, target);
         int Times = UList.Count;
         if (SortFilterEnable)
         {

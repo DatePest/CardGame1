@@ -58,7 +58,7 @@ public class Unit : MonoBehaviour
     {
         Debug.Log("HeroDead");
         unit.CurrentOwner.cardSpawnScript.HeroDeadRemove(unit);
-        CardGameManager.Instance.Hero_WinCheck(UnitData.CurrentOwner);
+        CardGame_Ctrl_Net.Instance.Hero_WinCheck(UnitData.CurrentOwner);
         unit.Event_UintDead -= HeroDead;
     }
 

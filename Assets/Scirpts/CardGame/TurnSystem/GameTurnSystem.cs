@@ -29,7 +29,7 @@ public class GameTurnSystem
         try
         {
             CurrentGameState = GameSystemState[State];
-            gameManagerInstance.SystemStateUIText.SetTMPro(State.ToString());
+            gameManagerInstance.GameSceneUI.GameStateUIText.SetTMPro(State.ToString());
             //Debug.Log("Turn_+" + State.ToString());
             CurrentGameState.StateEnter();
         }

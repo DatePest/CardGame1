@@ -88,7 +88,7 @@ public sealed class TopSearchReturn : Skill_NotTarget_WaitSelectCard
             //}
             //else 
             {
-                var CS = data.CurrentUsePlayer.CardSelectManager;
+                var CS = CardGame_PlayerUIManager.Instance.Get_CardSelectManager();
                 if (SearchEndCards.Count < Times)
                 {
                     CS.DisplayStart_2(SearchEndCards, SearchEndCards.Count);

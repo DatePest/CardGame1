@@ -888,7 +888,7 @@ MonoBehaviour:
   CardBack: {fileID: 5116228931461486980}
   CardAbilityFrame: {fileID: 7623040006197883302}
   Useing: {fileID: 5842298459938844796}
-  Ban: {fileID: 3469054535869655730}
+  BanArt: {fileID: 0}
   CardName: {fileID: 8544427230198956006}
   CardDes1: {fileID: 5148337882425296875}
   CurrentPlayer: {fileID: 0}
@@ -1053,6 +1053,7 @@ GameObject:
   - component: {fileID: 1773171735021286374}
   - component: {fileID: 5116228931461486980}
   - component: {fileID: 8016227388825438392}
+  - component: {fileID: 2720325773152224050}
   m_Layer: 5
   m_Name: CardBK
   m_TagString: Untagged
@@ -1131,3 +1132,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae95ca0e4d0d2b4e826343a7095cb97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2720325773152224050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8718446275665225855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee6cc5def01dbf48affa45be55231ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChidRoot: {fileID: 3895789678719233420}
+  CardArt: {fileID: 6951499382194162431}
+  CarAttributeTypeIcon: {fileID: 2764043485901496781}
+  CardBack: {fileID: 5116228931461486980}
+  CardAbilityFrame: {fileID: 7623040006197883302}
+  Useing: {fileID: 5842298459938844796}
+  BanArt: {fileID: 3469054535869655730}
+  CardName: {fileID: 8544427230198956006}
+  CardDes1: {fileID: 5148337882425296875}

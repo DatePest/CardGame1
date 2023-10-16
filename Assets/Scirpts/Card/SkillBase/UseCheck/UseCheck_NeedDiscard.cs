@@ -29,7 +29,7 @@ public class UseCheck_NeedDiscard: SkillUseCheckBase
                 }
                 else
                 {
-                    var CS = data.CurrentUsePlayer.CardSelectManager;
+                    var CS = CardGame_PlayerUIManager.Instance.Get_CardSelectManager();
                     if (SearchEndCards.Count < Times)
                         CS.DisplayStart_1(SearchEndCards, SearchEndCards.Count);
                     else

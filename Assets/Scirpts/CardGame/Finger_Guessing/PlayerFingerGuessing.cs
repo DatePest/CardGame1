@@ -19,7 +19,7 @@ public class PlayerFingerGuessing : MonoBehaviour
         onButton.callback.AddListener((data) => { action((PointerEventData)data); });
         eventTrigger.triggers.Add(onButton);
     }
-    public void SetSeletOBJ(PlayerOBJ player)
+    public void SetSeletOBJ()
     {
         AddButtonTrigger(scissors.gameObject, SetSeletScissors);
         AddButtonTrigger(rock.gameObject, SetSeletRock);
@@ -29,33 +29,34 @@ public class PlayerFingerGuessing : MonoBehaviour
         scissors.transform.parent.gameObject.SetActive(false);
         ResultEnemy.transform.parent.gameObject.SetActive(false);
         First.transform.parent.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     void SetSeletScissors(PointerEventData data)
     {
-        CardGameManager.Instance.FInger_Guessing.ReturnPlayerFingerServerRpc(NetworkManager.Singleton.LocalClientId, 1);
+        CardGameManager.Instance.GameSceneUI.FInger_Guessing.ReturnPlayerFingerServerRpc(NetworkManager.Singleton.LocalClientId, 1);
         scissors.transform.parent.gameObject.SetActive(false);
     }
     void SetSeletRock(PointerEventData data)
     {
-        CardGameManager.Instance.FInger_Guessing.ReturnPlayerFingerServerRpc(NetworkManager.Singleton.LocalClientId, 2);
+        CardGameManager.Instance.GameSceneUI.FInger_Guessing.ReturnPlayerFingerServerRpc(NetworkManager.Singleton.LocalClientId, 2);
         scissors.transform.parent.gameObject.SetActive(false);
     }
     void SetSeletPaper(PointerEventData data)
     {
-        CardGameManager.Instance.FInger_Guessing.ReturnPlayerFingerServerRpc(NetworkManager.Singleton.LocalClientId, 3);
+        CardGameManager.Instance.GameSceneUI.FInger_Guessing.ReturnPlayerFingerServerRpc(NetworkManager.Singleton.LocalClientId, 3);
         scissors.transform.parent.gameObject.SetActive(false);
     }
     void SetSeletFirst(PointerEventData data)
     {
         First.transform.parent.gameObject.SetActive(false);
         transform.gameObject.SetActive(false);
-        CardGameManager.Instance.FInger_Guessing.SetPlayersOrderServerRpc(true);
+        CardGameManager.Instance.GameSceneUI.FInger_Guessing.SetPlayersOrderServerRpc(true);
     }
     void SetSeletBack(PointerEventData data)
     {
         First.transform.parent.gameObject.SetActive(false);
         transform.gameObject.SetActive(false);
-        CardGameManager.Instance.FInger_Guessing.SetPlayersOrderServerRpc(false);
+        CardGameManager.Instance.GameSceneUI.FInger_Guessing.SetPlayersOrderServerRpc(false);
     }
 
     public void FingerGuessingStart()

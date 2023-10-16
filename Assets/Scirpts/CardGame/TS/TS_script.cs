@@ -7,28 +7,19 @@ using Unity.Netcode;
 public class TS_script : MonoBehaviour
 {
     public RawImage[] Images;
-    bool Remove = false;
 
     private void Awake()
     {
         Images = GetComponentsInChildren<RawImage>();
     }
-
-    public void TS_Add()
+    private void Start()
     {
         CardGameManager.Instance.Ts_Manager.TS_UpData_Action += UpdataRawImage;
         UpdataRawImage(CardGameManager.Instance.Ts_Manager.TsTimes);
-        Remove = true;
-
     }
     private void OnDisable()
     {
-        if (Remove && CardGameManager.Instance!=null)
-        {
-            Remove = !Remove;
-            CardGameManager.Instance.Ts_Manager.TS_UpData_Action -= UpdataRawImage;
-        }
-        
+        CardGameManager.Instance.Ts_Manager.TS_UpData_Action -= UpdataRawImage;
     }
 
     public void UpdataRawImage(int T)
