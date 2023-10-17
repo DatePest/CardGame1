@@ -7,13 +7,15 @@ using TMPro;
 public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManager>
 {
     [SerializeField] UI_EventAdd EndButton,UseEx, EX_Select, TS_AddSelect;
+    Dictionary<byte, Action<GameObject>> ButtonAction = new();
+    Action<int> EX_ReturnAction;
+    Action<TS_Tpye> TsAction;
+    /// //////////////////
     [SerializeField] SkillSelectTooltip skillselectTooltip;
     [SerializeField] CardSelectUI cardSelectManager;
     [SerializeField] PlayerStatetip playerTooltip;
-
-    Dictionary<byte, Action<GameObject>> ButtonAction =new();
-    Action<int> EX_ReturnAction;
-    Action<TS_Tpye> TsAction;
+    
+  
 
     public SkillSelectTooltip Get_SkillselectTooltip() => skillselectTooltip;
     public CardSelectUI Get_CardSelectManager() => cardSelectManager;
@@ -32,6 +34,10 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
     }
 
     #region Button
+    public void UseButtonAction(byte i, GameObject g)
+    {
+        ButtonAction[i].Invoke(g);
+    }
     void InsUI_EventAdd()
     {
         EndButton = Instantiate(EndButton, transform, false);
@@ -97,22 +103,7 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
         g.SetActive(false);
     }
     #endregion
-
-    public void UseButtonAction(byte i,GameObject g)
-    {
-        ButtonAction[i].Invoke(g);
-    }
-
-   
-    //void AddButtonTrigger(GameObject g, Action<PointerEventData> action)
-    //{
-    //    EventTrigger eventTrigger = g.AddComponent<EventTrigger>();
-    //    EventTrigger.Entry onButton = new EventTrigger.Entry();
-    //    onButton.eventID = EventTriggerType.PointerDown;
-    //    onButton.callback.AddListener((data) => { action((PointerEventData)data); });
-    //    eventTrigger.triggers.Add(onButton);
-    //}
-    
+    #region ButtonCtrl
     public void SetActiveEndButton(bool b)
     {
         EndButton.gameObject.SetActive(b);
@@ -129,7 +120,7 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
         EX_Select.gameObject.SetActive(false);
         EX_Select.GetButton(0).gameObject.SetActive(false);
         EX_Select.GetButton(1).gameObject.SetActive(false);
-        if (Ex1) EX_Select.GetButton(0).gameObject.SetActive(true); 
+        if (Ex1) EX_Select.GetButton(0).gameObject.SetActive(true);
         if (Ex2) EX_Select.GetButton(1).gameObject.SetActive(true);
     }
     public void SetActiveEX_Select_SetText(string T1, string T2)
@@ -153,6 +144,21 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
     {
         return TS_AddSelect.gameObject.activeSelf;
     }
+    #endregion
+
+   
+
+
+    //void AddButtonTrigger(GameObject g, Action<PointerEventData> action)
+    //{
+    //    EventTrigger eventTrigger = g.AddComponent<EventTrigger>();
+    //    EventTrigger.Entry onButton = new EventTrigger.Entry();
+    //    onButton.eventID = EventTriggerType.PointerDown;
+    //    onButton.callback.AddListener((data) => { action((PointerEventData)data); });
+    //    eventTrigger.triggers.Add(onButton);
+    //}
+
+
 
 
     public void SetplayerTooltip(int ActionTime,int EXCostDown, int EXCostDownRound)

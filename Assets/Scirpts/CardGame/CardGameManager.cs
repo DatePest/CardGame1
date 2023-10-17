@@ -8,6 +8,8 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
+
+
 public class CardGameManager : NetworkBehaviour
 {
     [SerializeField]

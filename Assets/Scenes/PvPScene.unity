@@ -896,6 +896,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &435506448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5732874954659949853, guid: 5e241a52f0405c9458e05c8792393a88, type: 3}
+  m_PrefabInstance: {fileID: 89375137}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8d2f188a41a184cab3d7475238f867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,7 +1927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notifyUseCard: {fileID: 823751206}
-  tS_Script: {fileID: 0}
+  tS_Script: {fileID: 2104431095}
   GameStateUIText: {fileID: 2140513464}
   SendUI: {fileID: 1310615886}
 --- !u!224 &1186109677 stripped
@@ -3497,7 +3508,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1950228202}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 435506448}
+        m_TargetAssemblyTypeName: CardGame_Ctrl_Net, Assembly-CSharp
+        m_MethodName: SceneQuit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1950228202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3812,6 +3835,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077156204}
   m_CullTransparentMesh: 1
+--- !u!114 &2104431095 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4796543238575999491, guid: 4674da058d424ae41841444879e6e091, type: 3}
+  m_PrefabInstance: {fileID: 1814676594}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86589480675c47428766420da44ea0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2140513463
 GameObject:
   m_ObjectHideFlags: 0
