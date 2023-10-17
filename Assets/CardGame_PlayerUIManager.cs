@@ -9,18 +9,35 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
     [SerializeField] UI_EventAdd EndButton,UseEx, EX_Select, TS_AddSelect;
     [SerializeField] SkillSelectTooltip skillselectTooltip;
     [SerializeField] CardSelectUI cardSelectManager;
+    [SerializeField] PlayerStatetip playerTooltip;
+
     Dictionary<byte, Action<GameObject>> ButtonAction =new();
     Action<int> EX_ReturnAction;
     Action<TS_Tpye> TsAction;
+
+    public SkillSelectTooltip Get_SkillselectTooltip() => skillselectTooltip;
+    public CardSelectUI Get_CardSelectManager() => cardSelectManager;
+    public PlayerStatetip Get_PlayerStatetip() => playerTooltip;
     private void Awake()
     {
         base.Awake();
+        skillselectTooltip = Instantiate(skillselectTooltip, transform, false);
+        cardSelectManager = Instantiate(cardSelectManager, transform, false);
+        playerTooltip = Instantiate(playerTooltip, transform, false);
+        InsUI_EventAdd();
+    }
+    private void OnDestroy()
+    {
+        //Instance = null;
+    }
+
+    #region Button
+    void InsUI_EventAdd()
+    {
         EndButton = Instantiate(EndButton, transform, false);
         UseEx = Instantiate(UseEx, transform, false);
         EX_Select = Instantiate(EX_Select, transform, false);
         TS_AddSelect = Instantiate(TS_AddSelect, transform, false);
-        skillselectTooltip = Instantiate(skillselectTooltip, transform, false);
-        cardSelectManager = Instantiate(cardSelectManager, transform, false);
         ButtonAction.Add((byte)ButtonAction.Count, End);
         ButtonAction.Add((byte)ButtonAction.Count, Card_EX_YesButton);
         ButtonAction.Add((byte)ButtonAction.Count, Card_EX_NoButton);
@@ -30,34 +47,14 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
         ButtonAction.Add((byte)ButtonAction.Count, TS_DexButton);
         ButtonAction.Add((byte)ButtonAction.Count, TS_NullButton);
     }
-
-    public void UseButtonAction(byte i,GameObject g)
-    {
-        ButtonAction[i].Invoke(g);
-    }
-
-    public SkillSelectTooltip Get_SkillselectTooltip() => skillselectTooltip;
-    public CardSelectUI Get_CardSelectManager() => cardSelectManager;
-    //void AddButtonTrigger(GameObject g, Action<PointerEventData> action)
-    //{
-    //    EventTrigger eventTrigger = g.AddComponent<EventTrigger>();
-    //    EventTrigger.Entry onButton = new EventTrigger.Entry();
-    //    onButton.eventID = EventTriggerType.PointerDown;
-    //    onButton.callback.AddListener((data) => { action((PointerEventData)data); });
-    //    eventTrigger.triggers.Add(onButton);
-    //}
     void End(GameObject g)
     {
         if (CardGameManager.Instance.MyPlayer.IsUsingCard) return;
         if (!CardGameManager.Instance.GameTurnSystem.CheckCurrentPlayer(CardGameManager.Instance.MyPlayer)) return;
         //EndButtonOBJ.SetActive(false);
-        CardGameManager.Instance.CardGame_Ctrl.GameStateUpdateServerRpc();
+        CardGame_Ctrl_Net.Instance.GameStateUpdateServerRpc();
     }
-    public void SetActiveEndButton(bool b)
-    {
-        EndButton.gameObject.SetActive(b);
-    }
-    void Card_EX_YesButton(GameObject g )
+    void Card_EX_YesButton(GameObject g)
     {
         EX_ReturnAction(1);
         g.SetActive(false);
@@ -80,6 +77,45 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
         EX_ReturnAction(2);
         g.SetActive(false);
         EX_ReturnAction = null;
+    }
+    void TS_WexButton(GameObject g)
+    {
+        TsAction?.Invoke(TS_Tpye.WEX);
+        TsAction = null;
+        g.SetActive(false);
+    }
+    void TS_DexButton(GameObject g)
+    {
+        TsAction?.Invoke(TS_Tpye.DEX);
+        TsAction = null;
+        g.SetActive(false);
+    }
+    void TS_NullButton(GameObject g)
+    {
+        TsAction?.Invoke(TS_Tpye.AVG);
+        TsAction = null;
+        g.SetActive(false);
+    }
+    #endregion
+
+    public void UseButtonAction(byte i,GameObject g)
+    {
+        ButtonAction[i].Invoke(g);
+    }
+
+   
+    //void AddButtonTrigger(GameObject g, Action<PointerEventData> action)
+    //{
+    //    EventTrigger eventTrigger = g.AddComponent<EventTrigger>();
+    //    EventTrigger.Entry onButton = new EventTrigger.Entry();
+    //    onButton.eventID = EventTriggerType.PointerDown;
+    //    onButton.callback.AddListener((data) => { action((PointerEventData)data); });
+    //    eventTrigger.triggers.Add(onButton);
+    //}
+    
+    public void SetActiveEndButton(bool b)
+    {
+        EndButton.gameObject.SetActive(b);
     }
     public void Card_EX_Button(Action<int> Action)
     {
@@ -113,29 +149,16 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
         else
             TS_AddSelect.GetButton(2).gameObject.SetActive(false);
     }
-    void TS_WexButton(GameObject g)
-    {
-        TsAction?.Invoke(TS_Tpye.WEX);
-        TsAction = null;
-        g.SetActive(false);
-    }
-    void TS_DexButton(GameObject g)
-    {
-        TsAction?.Invoke(TS_Tpye.DEX);
-        TsAction = null;
-        g.SetActive(false);
-    }
-    void TS_NullButton(GameObject g)
-    {
-        TsAction?.Invoke(TS_Tpye.AVG);
-        TsAction = null;
-        g.SetActive(false);
-    }
-
     public bool TS_SelectDisplayIsActive()
     {
         return TS_AddSelect.gameObject.activeSelf;
     }
 
-  
+
+    public void SetplayerTooltip(int ActionTime,int EXCostDown, int EXCostDownRound)
+    {
+        playerTooltip.SetActionTime(ActionTime);
+        playerTooltip.SetCostDown(EXCostDown);
+        playerTooltip.SetCostDownRound(EXCostDownRound);
+    }
 }

@@ -5,7 +5,9 @@ using Unity.Netcode;
 
 public class CardGame_Ctrl_Net : NetworkBehaviour
 {
+    CardGameManager cardGameManager;
     public static CardGame_Ctrl_Net Instance { get; private set;}
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -15,19 +17,20 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
             Destroy(this);
         }
         NetworkManager.Singleton.OnClientDisconnectCallback += PlayerClientDisconnect;
+        cardGameManager = GetComponent<CardGameManager>();
     }
 
     private void PlayerClientDisconnect(ulong Id)
     {
-        foreach (var a in CardGameManager.Instance.Players)
+        foreach (var a in cardGameManager.Players)
         {
             if (a.OwnerClientId == Id)
             {
                 //
 
-                CardGameManager.Instance.GameTurnSystem.StateChange(GameState.Finish);
+                cardGameManager.GameTurnSystem.StateChange(GameState.Finish);
 
-                CardGameManager.Instance.GameSceneUI.SendUI.SetTMPro(a.UserName.Value + " is Quit ");
+                cardGameManager.GameSceneUI.SendUI.SetTMPro(a.UserName.Value + " is Quit ");
             }
         }
     }
@@ -35,12 +38,12 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
     [ClientRpc]
     public void SetPlayerOwnerNumberID_ClientRpc(byte ID, int Number)
     {
-        CardGameManager.Instance.Maps[Number].SetPlayerOwnerID(ID);
+        cardGameManager.Maps[Number].SetPlayerOwnerID(ID);
     }
     [ClientRpc]
     public void Find_CardSpawnScriptClientRpc()
     {
-        foreach (var a in FindObjectsByType<PlayerOBJ>(FindObjectsSortMode.None))
+        foreach (var a in cardGameManager.Players)
         {
             a.CardSpawnScript_FindSetLoacl();
         }
@@ -51,7 +54,7 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
     [ServerRpc]
     public void GameStateUpdateServerRpc() => GameStateUpdateClientRpc();
     [ClientRpc]
-    void GameStateUpdateClientRpc() => CardGameManager.Instance.GameTurnSystem.GameStateUpdate();
+    void GameStateUpdateClientRpc() => cardGameManager.GameTurnSystem.GameStateUpdate();
     #endregion
     //[ClientRpc]
     //public void EndButtonClientRpc(ulong FirstClientID , bool b)
@@ -63,7 +66,7 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void StateChange_ServerRpc(GameState g)=> StateChange_ClientRpc(g);
     [ClientRpc]
-    void StateChange_ClientRpc(GameState g)=> CardGameManager.Instance.GameTurnSystem.StateChange(g);
+    void StateChange_ClientRpc(GameState g)=> cardGameManager.GameTurnSystem.StateChange(g);
     #endregion
 
     #region WinCheck
@@ -74,15 +77,15 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
 
         for (int i = 0; i < 6; i++)
         {
-            if (CardGameManager.Instance.UnitDictionary[(ulong)i] == null || CardGameManager.Instance.UnitDictionary[(ulong)i].UnitData.CurrentOwner != P) continue;
-            if (CardGameManager.Instance.UnitDictionary[(ulong)i].UnitData.IsDead != true)
+            if (cardGameManager.UnitDictionary[(ulong)i] == null || cardGameManager.UnitDictionary[(ulong)i].UnitData.CurrentOwner != P) continue;
+            if (cardGameManager.UnitDictionary[(ulong)i].UnitData.IsDead != true)
                 Check = false;
         }
         if (Check == true)
         {
-            CardGameManager.Instance.GameTurnSystem.StateChange(GameState.Finish);
+            cardGameManager.GameTurnSystem.StateChange(GameState.Finish);
 
-            CardGameManager.Instance.GameSceneUI.SendUI.SetTMPro(GetEnemyPlayer(P.OwnerClientId).UserName.Value + " is Win");
+            cardGameManager.GameSceneUI.SendUI.SetTMPro(GetEnemyPlayer(P.OwnerClientId).UserName.Value + " is Win");
             return;
         }
 
@@ -91,7 +94,7 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
     #region GetPlayer/Unit/Map
     public PlayerOBJ GetEnemyPlayer(ulong id)
     {
-        foreach (var a in CardGameManager.Instance.Players)
+        foreach (var a in cardGameManager.Players)
         {
             if (a.OwnerClientId != id)
             {
@@ -103,17 +106,17 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
     public MapArea GetUserEnemyMapArea(Unit Unit)
     {
         var id = Unit.UnitData.PlayerOwnerNumberID;
-        for (int i = 0; i < CardGameManager.Instance.Maps.Length; i++)
+        for (int i = 0; i < cardGameManager.Maps.Length; i++)
         {
-            if (CardGameManager.Instance.Maps[i].PlayerOwnerID != id)
-                return CardGameManager.Instance.Maps[i];
+            if (cardGameManager.Maps[i].PlayerOwnerID != id)
+                return cardGameManager.Maps[i];
         }
         return null;
     }
     public List<Unit> GetAllUnit()
     {
         var List = new List<Unit>();
-        foreach (var a in CardGameManager.Instance.Maps)
+        foreach (var a in cardGameManager.Maps)
         {
             var u = a.GetAllUnit();
             if (u != null)
@@ -129,7 +132,7 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
     public List<MapSolt> GetAllMapSolt()
     {
         var List = new List<MapSolt>();
-        foreach (var a in CardGameManager.Instance.Maps)
+        foreach (var a in cardGameManager.Maps)
         {
             var u = a.GetAllMapSolt();
             if (u != null)
@@ -175,23 +178,23 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
     #region CreateUnit
     [ServerRpc]
     public void CreateUnit_ServerRpc(string Unit, UnitTpye unitTpye, int Owner, int MapID)
-                => CreateUnit_ClientRpc(Unit, unitTpye, Owner, MapID, (ulong)CardGameManager.Instance.UnitDictionary.Count);
+                => CreateUnit_ClientRpc(Unit, unitTpye, Owner, MapID, (ulong)cardGameManager.UnitDictionary.Count);
     [ClientRpc]
     void CreateUnit_ClientRpc(string Unit, UnitTpye unitTpye, int Owner, int MapID, ulong Uid)
     {
-        var U = Instantiate<Unit>(CardGameManager.Instance._UnitPrefab);
-        CardGameManager.Instance.UnitDictionary.Add(Uid, U);
+        var U = Instantiate<Unit>(cardGameManager._UnitPrefab);
+        cardGameManager.UnitDictionary.Add(Uid, U);
         var so = GameManager.Instance.DataBase.StringToUnit(Unit);
         U.Set_InitializationUnit(so, (ulong)Owner, Uid);
         U.UnitData.SetUnitTpye(unitTpye);
         if (Owner == 0)
         {
-            var Map = CardGameManager.Instance.Maps[0].MapAreas[MapID];
+            var Map = cardGameManager.Maps[0].MapAreas[MapID];
             Map.SetUnit(U);
         }
         else
         {
-            var Map = CardGameManager.Instance.Maps[1].MapAreas[MapID];
+            var Map = cardGameManager.Maps[1].MapAreas[MapID];
             Map.SetUnit(U);
         }
     }

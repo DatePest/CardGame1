@@ -74,11 +74,7 @@ public class PlayerOBJ : NetworkBehaviour
         CurrentUseCard = c;
         IsUsingCard = b;
     }
-    public void SetExCostDown_Zero()
-    {
-        ExCostDown = 0;
-        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDown(ExCostDown);
-    }
+  
     public void UseStartSkillAction(AbilityNeedData data, SO_SKillAbility sObj_SKill)
     {
         UseStartSkill?.Invoke(data,sObj_SKill);
@@ -89,15 +85,20 @@ public class PlayerOBJ : NetworkBehaviour
         SkillDisCardCount += i;
         SkillDisCardEvent?.Invoke(i);
     }
+    public void SetExCostDown_Zero()
+    {
+        ExCostDown = 0;
+        UpdateplayerTooltip();
+    }
     public void SetExCostDown(int i)
     {
         ExCostDown += i;
-        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDown(ExCostDown);
+        UpdateplayerTooltip();
     }
     public void SetExCostDownKeepRound(int i)
     {
         ExCostDownKeepRound += i;
-        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDownRound(ExCostDownKeepRound);
+        UpdateplayerTooltip();
     }
     public void SetRoundStartAddedCard(int i)
     {
@@ -115,17 +116,20 @@ public class PlayerOBJ : NetworkBehaviour
     {
         CurrentRoundUseedCardsConut = 0;
         TargetDiscardCards = 0;
+        SkillDisCardCount = 0;
         ActionTimes = 0;
         ExCostDown = 0;
-        SkillDisCardCount = 0;
         ExCostDownKeepRound = 0;
-        CardGameManager.Instance.GameSceneUI.playerTooltip.SetActionTime(ActionTimes);
-        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDown(ExCostDown);
-        CardGameManager.Instance.GameSceneUI.playerTooltip.SetCostDownRound(ExCostDownKeepRound);
         BanWEx = false;
         BanDEx = false;
-
+        UpdateplayerTooltip();
     }
+    private void UpdateplayerTooltip()
+    {
+        if (!IsOwner) return;
+        CardGame_PlayerUIManager.Instance.SetplayerTooltip(ActionTimes, ExCostDown, ExCostDownKeepRound);
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void Event_EXSkillUse_ServerRpc(NetworkBehaviourReference playerobj ,int Cardid,CardsPileEnum cardsPile,ServerRpcParams serverRpcParams = default)
     {
@@ -216,11 +220,6 @@ public class PlayerOBJ : NetworkBehaviour
 
     public bool CheckRule(Enum_Skill_Rule R)
     {
-        //if(Rule[R.ToString()] == false)
-        //{
-        //    return false
-        //}
-
         return Rule[R.ToString()] ;
     }
 
@@ -229,7 +228,7 @@ public class PlayerOBJ : NetworkBehaviour
         //CanSpawnLook == true&&
         if ( IsCanSpawn == false) return;
         ActionTimes += i;
-        CardGameManager.Instance.GameSceneUI.playerTooltip.SetActionTime(ActionTimes);
+        UpdateplayerTooltip();
         if (ActionTimes <= 0)
         {
             IsCanSpawn = false;
@@ -240,7 +239,7 @@ public class PlayerOBJ : NetworkBehaviour
     public void SetActionTimes(int i)
     {
         ActionTimes = i;
-        CardGameManager.Instance.GameSceneUI.playerTooltip.SetActionTime(ActionTimes);
+        UpdateplayerTooltip();
     }
     
 
@@ -252,8 +251,8 @@ public class PlayerOBJ : NetworkBehaviour
         if (!IsOwner) return;
         if (CurrentHandCardsConut > 6) TargetDiscardCards = CurrentHandCardsConut-6;
         if (TargetDiscardCards < EndNeedDiscard) TargetDiscardCards = EndNeedDiscard;
-        if(TargetDiscardCards ==0) 
-            CardGameManager.Instance.CardGame_Ctrl.GameStateUpdateServerRpc();
+        if(TargetDiscardCards ==0)
+            CardGame_Ctrl_Net.Instance.GameStateUpdateServerRpc();
         else
         RoundEndRun(TargetDiscardCards,false);
     }
@@ -300,7 +299,7 @@ public class PlayerOBJ : NetworkBehaviour
                 }
             }
         }
-        CardGameManager.Instance.CardGame_Ctrl.GameStateUpdateServerRpc();
+        CardGame_Ctrl_Net.Instance.GameStateUpdateServerRpc();
 
     }
     public void SetEndDiscard(int i)

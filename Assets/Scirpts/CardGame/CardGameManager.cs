@@ -18,10 +18,8 @@ public class CardGameManager : NetworkBehaviour
     public bool IsSingleplayer { get; private set; } = false;
     public PlayerDeckData[] playerdecks = new PlayerDeckData[2];
     public bool NeedWait = false;
-
-    
+    public Dictionary<ulong, Unit> UnitDictionary = new();
     public MapArea[] Maps = new MapArea[2];
-    public CardGame_Ctrl_Net CardGame_Ctrl { get; private set; }
     public GameSceneUI GameSceneUI { get; private set; }
     public  List<PlayerOBJ> Players  { get; private set; }
     public PlayerOBJ MyPlayer { get; private set; }
@@ -30,13 +28,10 @@ public class CardGameManager : NetworkBehaviour
     public TS_Manager Ts_Manager { get; private set; }
    
     public CardSpawnManager CardSpawnManager { get; private set; }
-    public Dictionary<ulong, Unit> UnitDictionary =new();
+   
     public PlayerDeckDatas playerDeckDatas { get; private set; }
     private static CardGameManager instance;
-    public static CardGameManager Instance
-    {
-        get { return instance; }
-    }
+    public static CardGameManager Instance => instance;
     private  void Awake()
     {
         if (instance == null)
@@ -52,7 +47,6 @@ public class CardGameManager : NetworkBehaviour
         GameSceneUI = FindFirstObjectByType<GameSceneUI>();
         CardSpawnManager = FindFirstObjectByType<CardSpawnManager>();
         GameNotifyAction_Net = GetComponent<GameNotifyAction_Net>();
-        CardGame_Ctrl = GetComponent<CardGame_Ctrl_Net>();
         GameTurnSystem = new(this);
         
         
@@ -96,23 +90,6 @@ public class CardGameManager : NetworkBehaviour
     void SeedDecks_ClientRpc(PlayerDeckData data ,int i)
     {
         playerdecks[i] = data;
-    }
-    [ClientRpc]
-    void PlayerDeckData_ClientRpc(PlayerDeckData g)
-    {
-        if (IsServer) return;
-        foreach(var a in g.Dards)
-        {
-            if (a == null) continue;
-            Debug.Log(a.ToString());
-        }
-        foreach (var a in g.Heros)
-        {
-            if (a.UnitUid == null) continue;
-            Debug.Log(a.UnitUid.ToString());
-            Debug.Log(a.MapPoint.ToString());
-        }
-
     }
 
     [ServerRpc(RequireOwnership = false)]

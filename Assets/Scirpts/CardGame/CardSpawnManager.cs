@@ -23,12 +23,9 @@ public class CardSpawnManager : NetworkBehaviour
     
 
     [ServerRpc(RequireOwnership = false)]
-    public void SetCardSpawnScriptsOwnerID_ServerRpc(int i, byte clientid)
-    {
-        SetCardSpawnScriptsOwnerID_ClientRpc(i, clientid);
-    }
+    public void SetCardSpawnScriptsOwnerID_ServerRpc(int i, byte clientid) => SetCardSpawnScriptsOwnerID_ClientRpc(i, clientid);
     [ClientRpc]
-    public void SetCardSpawnScriptsOwnerID_ClientRpc(int i ,byte clientid)
+     void SetCardSpawnScriptsOwnerID_ClientRpc(int i ,byte clientid)
     {
         Dictionary_CardSpawnScripts.Add(clientid, cardSpawnScripts[i]);
         Dictionary_CardSpawnScripts[clientid].OwnerID = clientid;

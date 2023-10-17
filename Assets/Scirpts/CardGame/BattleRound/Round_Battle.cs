@@ -34,7 +34,7 @@ public class Round_Battle : Round_IState
                     Ui.CurrnetAtk(i);
                     Battle_Actions[i].AtkAction();
                 }
-            CardGameManager.Instance.CardGame_Ctrl.GameStateUpdateServerRpc();
+            CardGame_Ctrl_Net.Instance.GameStateUpdateServerRpc();
         }
         //CardGameManager.Instance.GameTurnSystem_Net.BattleEnd_ServerRpc();
 

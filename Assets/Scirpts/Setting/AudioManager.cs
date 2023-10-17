@@ -18,6 +18,7 @@ public class AudioManager : Singleton_T_Mono<AudioManager>
     }
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
         Set();
         for (int i = 0; i < Names.Length; i++)
         {
