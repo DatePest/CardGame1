@@ -12,7 +12,6 @@ public class PlayerOBJ : NetworkBehaviour
     [SerializeField] List<Vector3> positions, rotation;
     public NetworkVariable<NetworkString> UserName = new("NewPlayer");
     public Camera Usercamera { get; private set; }
-    public Canvas canvas { get; private set; }
     public int ActionTimes { get; private set; }
     public int EndNeedDiscard { get; private set; }
     public int CurrentHandCardsConut => cardSpawnScript.FindCardsPile(CardsPileEnum.hand).Cards.Count;
@@ -27,7 +26,6 @@ public class PlayerOBJ : NetworkBehaviour
     public bool IsUsingCard { get; private set; }
     public Dictionary<string, bool> Rule { get; private set; }
     public MouseManager UserMouseManager { get; private set; }
-    [SerializeField] GameObject MyGround;
     public CardSpawnScript cardSpawnScript { get; private set; }
     public bool BanWEx { get; private set; } = false;
     public bool BanDEx { get; private set; } = false;
@@ -39,7 +37,6 @@ public class PlayerOBJ : NetworkBehaviour
     void Awake()
     {
         Usercamera = GetComponentInChildren<Camera>();
-        canvas = GetComponentInChildren<Canvas>();
         UserMouseManager = GetComponentInChildren<MouseManager>();
         Rule = new();
         foreach (Enum_Skill_Rule value in Enum.GetValues(typeof(Enum_Skill_Rule)))
@@ -56,7 +53,6 @@ public class PlayerOBJ : NetworkBehaviour
         {
             UserMouseManager.enabled = false;
             Usercamera.gameObject.SetActive(false);
-            canvas.gameObject.SetActive(false);
             return;
         }
         SetCamera((int)OwnerClientId);
@@ -81,9 +77,9 @@ public class PlayerOBJ : NetworkBehaviour
     }
     public void UseSkillDisCardEvent(int i)
     {
-        //Debug.Log("UseSkillDisCardEvent");
         SkillDisCardCount += i;
         SkillDisCardEvent?.Invoke(i);
+        //Debug.Log("UseSkillDisCardEvent_"+ SkillDisCardCount);
     }
     public void SetExCostDown_Zero()
     {
@@ -225,7 +221,6 @@ public class PlayerOBJ : NetworkBehaviour
 
     public  void AddActionTimes(int i)
     {
-        //CanSpawnLook == true&&
         if ( IsCanSpawn == false) return;
         ActionTimes += i;
         UpdateplayerTooltip();

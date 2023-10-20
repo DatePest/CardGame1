@@ -21,7 +21,7 @@ namespace LobbyScene
             ButtonDictionary.Add((byte)ButtonDictionary.Count, Exit);
             ButtonDictionary.Add((byte)ButtonDictionary.Count, _Start);
             ButtonDictionary.Add((byte)ButtonDictionary.Count, LobbyIDCopy);
-
+            _Start.gameObject.SetActive(false);
         }
 
         public Button GetButton(LobbyButton_ button_)

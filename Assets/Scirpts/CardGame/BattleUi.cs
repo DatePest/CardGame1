@@ -8,11 +8,9 @@ public class BattleUi : MonoBehaviour
     [SerializeField] ObjPool objPool;
     int Before=0;
     // Start is called before
-    public void BattleShomScreen(ref Round_IState T )
+    public void BattleShowScreen(ref Round_IState T )
     {
-        //gameObject.SetActive(true);
-        //Round_IState T = null;
-        //CardGameManager.Instance.GameTurnSystem.GetRoundiState(Round_State_Enum.Round_Battle, ref T);
+
         Round_Battle B = T as Round_Battle;
         B.BattleActions_Event += BattleList;
         B.BattleActions_ClearEvent += BattleListClear;

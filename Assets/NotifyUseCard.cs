@@ -14,8 +14,9 @@ public class NotifyUseCard : MonoBehaviour
         CardGameManager.Instance.GameNotifyAction_Net.CardUse += notifyUseCrad;
         CardGameManager.Instance.GameNotifyAction_Net.Unit += notifyUnitSkill;
     }
-    private void OnDisable()
+    private void OnDestroy()
     {
+        if (CardGameManager.Instance == null) return;
         CardGameManager.Instance.GameNotifyAction_Net.CardUse -= notifyUseCrad;
         CardGameManager.Instance.GameNotifyAction_Net.Unit -= notifyUnitSkill;
     }

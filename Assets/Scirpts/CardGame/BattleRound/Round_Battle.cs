@@ -32,6 +32,7 @@ public class Round_Battle : Round_IState
             for(int i=0; i< Battle_Actions.Count; i++)
                 {
                     Ui.CurrnetAtk(i);
+                    if (Battle_Actions[i].SkillData.UserTarget == null) continue;
                     Battle_Actions[i].AtkAction();
                 }
             CardGame_Ctrl_Net.Instance.GameStateUpdateServerRpc();

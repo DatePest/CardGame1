@@ -26,7 +26,6 @@ public class Finger_Guessing : NetworkBehaviour
      IEnumerator Run()
     {
         Finger_Guessing_Data.Clear();
-       
         StartFinger_GuessingClientRpc();
         while (Finger_Guessing_Data.Count < CardGameManager.Instance.Players.Count)
         {

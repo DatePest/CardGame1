@@ -6,32 +6,28 @@ using Unity.Netcode;
 
 public class TS_script : MonoBehaviour
 {
-    public RawImage[] Images;
+    [SerializeField] Sprite[] Sprites;
+    [SerializeField] RawImage Images;
 
     private void Awake()
     {
-        Images = GetComponentsInChildren<RawImage>();
+        Images = GetComponent<RawImage>();
     }
     private void Start()
     {
         CardGameManager.Instance.Ts_Manager.TS_UpData_Action += UpdataRawImage;
         UpdataRawImage(CardGameManager.Instance.Ts_Manager.TsTimes);
     }
-    private void OnDisable()
+    
+    private void Ond()
     {
+        if(CardGameManager.Instance ==null) return;
         CardGameManager.Instance.Ts_Manager.TS_UpData_Action -= UpdataRawImage;
     }
 
     public void UpdataRawImage(int T)
     {
-        foreach (var a in Images)
-        {
-            a.color = Color.white;
-        }
-        for (int i = 0; i < T; i++)
-        {
-            Images[i].color = Color.black;
-        }
+        Images.texture = Sprites[T].texture;
     }
 }
 

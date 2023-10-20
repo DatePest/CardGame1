@@ -7,15 +7,15 @@ public class UI_EventAdd : MonoBehaviour
 {
     [SerializeField]  E_Button[] buttons;
 
-    private void Awake()
+    public void RStart()
     {
         foreach(var a in buttons)
         {
             a.Start(this.gameObject);
         }
+        gameObject.SetActive(false);
     }
     public Button GetButton(int i) => buttons[i].GetButton();
-
 
 }
 [System.Serializable]

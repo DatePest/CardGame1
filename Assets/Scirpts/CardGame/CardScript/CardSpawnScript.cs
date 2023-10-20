@@ -14,7 +14,7 @@ public class CardSpawnScript : MonoBehaviour
      CardsPile hand, deck, disdeck, search , Remove;
     bool IsSpawnExit =false;
     Coroutine SpawnCoroutine;
-    public bool SpawnEnd { get { if (SpawnCoroutine == null) return true; else return false; } }
+    public bool SpawnEnd { get; private set; } = false;
     public bool InSynchronizeIng { get; private set; } = false;
     bool SysWaitSynchronize = false;
     public bool IsOwner=false;
@@ -73,7 +73,7 @@ public class CardSpawnScript : MonoBehaviour
     {
         if (InSynchronizeIng != false)
         {
-            await Task.Delay(100);
+            await Task.Delay(300);
         }
         InSynchronizeIng = true;
         // var List = FindDeckCardSoltList(cardsPile);
@@ -166,7 +166,7 @@ public class CardSpawnScript : MonoBehaviour
         }
     }
 
-    public void CardsPileChange(GameObject G ,CardsPileEnum From, CardsPileEnum Goto)
+    public  void CardsPileChange(GameObject G ,CardsPileEnum From, CardsPileEnum Goto)
     {
         var CardSolt = G.GetComponentInChildren<CardSolt>();
         switch (Goto)
@@ -177,7 +177,7 @@ public class CardSpawnScript : MonoBehaviour
                 break;
             case CardsPileEnum.deck:
                 CardSolt.SetCardSoltInThe(Goto);
-                CardSolt.DisEnabledCard();
+                CardSolt.DisCard();
                 break;
             case CardsPileEnum.disdeck:
                 CardSolt.SetCardSoltInThe(Goto);
@@ -194,6 +194,7 @@ public class CardSpawnScript : MonoBehaviour
         }
         FindCardsPile(From).Remove(G);
         FindCardsPile(Goto).Add(G);
+        
         //FindDeckCardSoltList(From).Remove(CardSolt.CardSO.CardId);
         //FindDeckCardSoltList(Goto).Add(CardSolt.CardSO.CardId);
     }
@@ -320,7 +321,6 @@ public class CardSpawnScript : MonoBehaviour
             {
                 return G;
             }
-           
         }
         return null;
     }
@@ -344,13 +344,9 @@ public class CardSpawnScript : MonoBehaviour
         //Action<CardsPileEnum, CardsPileEnum, bool> Spawnaction = SpawnSizeFromToTarget;
         SpawnCoroutine = StartCoroutine(SpawnTime(Size,  From,  Target, IsDarwCardSO));
     }
-    void ReDeck(List<GameObject> Cards)
+    async void ReDeck(List<GameObject> Cards)
     {
-      
-        foreach (var a in Cards)
-        {
-            CardsPileChange(a, CardsPileEnum.disdeck, CardsPileEnum.deck);
-        }
+        await ListCardsPileChange(Cards, CardsPileEnum.disdeck, CardsPileEnum.deck);
     }
     async void SpawnSizeFromToTarget(CardsPileEnum From, CardsPileEnum Target, bool IsDarwALL = false)
     {
@@ -361,18 +357,18 @@ public class CardSpawnScript : MonoBehaviour
             {
                 SysWaitSynchronize = true;
                 ReDeck(S);
-                await Task.Delay(100);
+                await Task.Delay(500);
 
                 if (NetworkManager.Singleton.IsHost)
                 {
                     CardGameManager.Instance.CardSpawnManager.ClientSynchronizServerRpc(OwnerID.Value, CardsPileEnum.deck, true);
-                    while (SysWaitSynchronize == true)
-                    {
-                        await Task.Delay(100);
-                    }
                 }
-                await Task.Delay(200);
-
+                while (SysWaitSynchronize == true)
+                {
+                    await Task.Delay(200);
+                }
+                await Task.Delay(500);
+                
             }
             else
             {
@@ -389,32 +385,21 @@ public class CardSpawnScript : MonoBehaviour
 
     private IEnumerator SpawnTime(int Size, CardsPileEnum From, CardsPileEnum Target, bool b)
     {
+        SpawnEnd = false;
         for (int i = 0; i < Size; i++)
         {
             SpawnSizeFromToTarget(From, Target, b);
             if (IsSpawnExit)
             {
-                IsSpawnExit = false;
+                yield return new WaitForSeconds(0.5F);
                 break;
             }
             yield return new WaitForSeconds(0.5F);
         }
         SpawnCoroutine = null;
         IsSpawnExit = false;
+        SpawnEnd = true;
     }
-
-    public void RemoveCards()///???
-    {
-        if (hand.Cards.Count == 0)
-        {
-            IsSpawnExit = true;
-            return;
-        }
-        GameObject card = hand.Cards[^1];
-        hand.Remove(card);
-        deck.Add(card);
-    }
-
     public void Shuffle_Cards(CardsPileEnum cardsPile)
     {
         FindCardsPile(cardsPile).Shuffle_Cards();

@@ -139,6 +139,7 @@ public class SO_Unit : ScriptableObject
     public void SetUnitShield(int i)
     {
         UnitShield += i;
+        //Debug.Log(UnitName + "sh=" + UnitShield);
         if (UnitShield < 0) UnitShield = 0;
         CallUpdata();
     }
@@ -291,8 +292,6 @@ public class SO_Unit : ScriptableObject
         SetLastAtk();
         LastArmor = (int)((float) (UnitArmor + ModfirArrmor) * ModfirMultiplierArrmor);
         LastMaxHP = (int)Math.Max(1, (ModfirMaxHP + UnitMaxHp)* ModfirMultiplierMaxHP ) ;
-        if(UnitShield != 0)
-        Debug.Log(UnitName+"sh=" + UnitShield);
         UpdataAction?.Invoke();
         //NetCurrentHP?.Invoke();
     }

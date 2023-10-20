@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using Unity.Netcode;
 using System;
+using System.Threading.Tasks;
 
 public class CardSolt : MonoBehaviour
 {
@@ -99,10 +100,6 @@ public class CardSolt : MonoBehaviour
         MyCardDisplay.RemoveCardDisplay();
         //OwnerID = null;
     }
-    public void DisEnabledCard()
-    {
-        MyCardDisplay.Set_ChidRootActive(false);
-    }
     public void UpdateCardSO(SO_CardBase Card)
     {
         CardSO = Card;
@@ -116,9 +113,10 @@ public class CardSolt : MonoBehaviour
         if(CardCurrentInThe == CardSoltInThe.Indeck)
             MyCardDisplay.Set_ChidRootActive(false);
     }
+    public void DisCard() => MyCardDisplay.Set_ChidRootActive(false);
     public void EnableCard(bool IsAllEnable = false)
     {
-        DisEnabledCard();
+        MyCardDisplay.Set_ChidRootActive(false);
         if (IsAllEnable)
         {
             MyCardDisplay.Set_ChidRootActive(true);
@@ -219,16 +217,19 @@ public class CardSolt : MonoBehaviour
     }
 
    
-    public void CardSolt_UseEndToDisdeck()
+    public async void CardSolt_UseEndToDisdeck()
     {
         CurrentUsePlayer.BeforeData = null;
         SetUseArt(false);
-        CurrentUsePlayer.AddActionTimes(-1);
+        while (!CurrentUsePlayer.cardSpawnScript.SpawnEnd)
+        {
+            await Task.Delay(350);
+        }
         if (EndToRomve)
         {
             if (!CardGameManager.Instance.IsSingleplayer)
                 CardGameManager.Instance.GameNotifyAction_Net.CardUseEndNotifyServerRpc(CardUid, CurrentInCardsPile(), CardsPileEnum.Remove);
-            CurrentUsePlayer.cardSpawnScript.CardsPileChange(gameObject,CurrentInCardsPile(), CardsPileEnum.Remove);
+             CurrentUsePlayer.cardSpawnScript.CardsPileChange(gameObject,CurrentInCardsPile(), CardsPileEnum.Remove);
           
         }
         else
@@ -237,7 +238,8 @@ public class CardSolt : MonoBehaviour
                 CardGameManager.Instance.GameNotifyAction_Net.CardUseEndNotifyServerRpc(CardUid, CurrentInCardsPile(), CardsPileEnum.disdeck);
             CurrentUsePlayer.cardSpawnScript.CardsPileChange(gameObject, CurrentInCardsPile(), CardsPileEnum.disdeck);
            
-        }
+        } 
+        CurrentUsePlayer.AddActionTimes(-1);
         CurrentUsePlayer.SetCurrentRoundUseCardsConut(1);
         //CardUseingLook = false;
         CurrentUsePlayer.SetCurrentUseCard(null,false);
@@ -283,7 +285,7 @@ public class CardSolt : MonoBehaviour
                 foreach (var a in CardSO.DiscardAbilities)
                 {
                     NowCheckTims++;
-                    if (a.Skill_Rule != null)
+                    if (a.Skill_Rule != Enum_Skill_Rule.Null)
                     {
                         if (!CurrentUsePlayer.CheckRule((Enum_Skill_Rule)a.Skill_Rule))
                         {
@@ -357,7 +359,6 @@ public class CardSolt : MonoBehaviour
                     }
                 }
             }
-            //Skill_1 = CradUseing.Completed;
             if (!GetCanEx1Check()&& !GetCanEx2Check())
             {
                 EX_Check = CradUseing.Completed;
@@ -388,7 +389,6 @@ public class CardSolt : MonoBehaviour
                     ExCost_SetValueTsTimes(true);
                     if (CardGameManager.Instance.IsSingleplayer != true)
                         CardGameManager.Instance.GameNotifyAction_Net.ExCost_SetValueTsTimesServerRpc(CardUid, true);
-                    //CardGameManager.Instance.tS_Manager.SetValueTsTimes(-cardSO.EX1_Wex_Cost);
                 }
                 else if (UseCardCheckTimes == 2)
                 {
@@ -396,18 +396,17 @@ public class CardSolt : MonoBehaviour
                     ExCost_SetValueTsTimes(false);
                     if (CardGameManager.Instance.IsSingleplayer != true)
                         CardGameManager.Instance.GameNotifyAction_Net.ExCost_SetValueTsTimesServerRpc(CardUid, false);
-                    //CardGameManager.Instance.tS_Manager.SetValueTsTimes(+cardSO.EX2_Dex_Cost);
                 }
 
             }
             else if (UseCardCheckTimes == 2) // f
             {
                 Skill_2 = CradUseing.Completed;
-               // EX_Check = CradUseing.Completed;
             }
         }
         if (Skill_2 == CradUseing.Waiting)
         {
+            yield return new WaitForSeconds(1f);
             CurrentUsePlayer.Event_EXSkillUse_ServerRpc(CurrentUsePlayer, CardUid, CurrentInCardsPile());
             NowCheckTims = 0;
             UseCardCheckTimes = 0;
@@ -438,6 +437,7 @@ public class CardSolt : MonoBehaviour
             }
             CardGameManager.Instance.GameNotifyAction_Net.CardExUseEndServerRpc();
         }
+        yield return new WaitForSeconds(1.25f);
         CardSolt_UseEndToDisdeck();
     }
 }

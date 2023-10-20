@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-
 using Netcode.Transports.Facepunch;
-
+/// <summary>
+/// 2023/7 ~ 2023~11
+/// Developer   Programming DatePest // Art : •s–Å
+/// </summary>
 public class GameManager : Singleton_T_Mono<GameManager>
 {
     [SerializeField]

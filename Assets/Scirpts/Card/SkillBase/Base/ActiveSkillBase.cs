@@ -37,10 +37,8 @@ public abstract class ActiveSkillBase : SO_SKillAbility
     protected async void StartRunSkill(AbilityNeedData data)
     {
         UseNotify(data);
-        //Debug.Log(AbilityID);
         await UseSkill(data);
         await Task.Delay(300);
-        
     }
     public async void PassiveSkillRunSkill(AbilityNeedData data)
     {

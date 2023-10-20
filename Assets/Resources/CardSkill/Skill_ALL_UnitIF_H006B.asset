@@ -22,7 +22,7 @@ MonoBehaviour:
   LoadData_NotLoadMap: 0
   target: 0
   TurnSkills:
-  - {fileID: 11400000, guid: ffe9c96eb572f0b4aba17670c9773ceb, type: 2}
+  - {fileID: 11400000, guid: 5818cc22653b7234aa7da78bf8bf79b9, type: 2}
   FalseSkills: []
   UnitCheck: {fileID: 0}
   SortFilterEnable: 1

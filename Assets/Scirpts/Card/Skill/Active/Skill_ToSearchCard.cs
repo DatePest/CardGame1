@@ -22,18 +22,10 @@ public sealed class Skill_ToSearchCard : Skill_NotTarget_WaitSelectCard
 
     public override async Task UseSkill(AbilityNeedData data)
     {
-        //foreach (var a in data.SelectCardUids)
-        //{
-        //    Debug.Log(a);
-        //}
         if (data.SelectCardUids == null|| data.SelectCardUids.Length <1)
         {
             return;
-            //data = ReRandom(data);
         }
-        //Debug.Log("data.SelectCardID" + data.SelectCardID[0]);
-
-        
         var Cards = await data.CurrentUsePlayer.cardSpawnScript.FindCardGoto(data.SelectCardUids, From, Target);
        
         if (From2 != CardsPileEnum.Null)
@@ -111,7 +103,7 @@ public sealed class Skill_ToSearchCard : Skill_NotTarget_WaitSelectCard
         if (IsUseDisCardAbilities)
         {
             if (NetworkManager.Singleton.LocalClientId != data.CurrentUsePlayer.OwnerClientId) return;
-             await WaitSelectCard.UseDisCardAbilities(Cards);
+            await WaitSelectCard.UseDisCardAbilities(Cards);
         }
         
     }

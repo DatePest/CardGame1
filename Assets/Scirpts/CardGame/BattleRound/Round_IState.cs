@@ -21,8 +21,9 @@ public abstract class Round_IState : I_StatePattern
         CurrentPlayer.SetCurrentRoundUseCardsConut(-99,false); 
         if (CurrentPlayer == CardGameManager.Instance.MyPlayer)
             CardGame_PlayerUIManager.Instance.SetActiveEndButton(true);
+        //Debug.Log("Now is" + GetType());
         Round_ActionInvoke();
-        //Debug.Log("CurrentPlayer Is _" + CurrentPlayer.UserName.Value);
+       
     }
     public override void StateExit()
     {

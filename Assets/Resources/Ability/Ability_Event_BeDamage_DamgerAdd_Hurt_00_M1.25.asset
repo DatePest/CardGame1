@@ -15,4 +15,4 @@ MonoBehaviour:
   AbilityId: Ability_Event_BeDamage_DamgerAdd_Hurt_00_M1.25
   addTarget: 1
   Addvalue: 0
-  multiply: 1.25
+  multiply: 0.25

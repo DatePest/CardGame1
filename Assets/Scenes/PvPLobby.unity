@@ -827,8 +827,8 @@ GameObject:
   m_Component:
   - component: {fileID: 613609782}
   - component: {fileID: 613609783}
-  - component: {fileID: 613609784}
   - component: {fileID: 613609785}
+  - component: {fileID: 613609784}
   m_Layer: 0
   m_Name: Lobby
   m_TagString: Untagged

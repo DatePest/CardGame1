@@ -23,7 +23,7 @@ public class CardGameManager : NetworkBehaviour
     public Dictionary<ulong, Unit> UnitDictionary = new();
     public MapArea[] Maps = new MapArea[2];
     public GameSceneUI GameSceneUI { get; private set; }
-    public  List<PlayerOBJ> Players  { get; private set; }
+    public List<PlayerOBJ> Players{ get; private set; }
     public PlayerOBJ MyPlayer { get; private set; }
     public GameTurnSystem GameTurnSystem { get; private set; }
     public GameNotifyAction_Net GameNotifyAction_Net{ get; private set; }
@@ -49,17 +49,14 @@ public class CardGameManager : NetworkBehaviour
         GameSceneUI = FindFirstObjectByType<GameSceneUI>();
         CardSpawnManager = FindFirstObjectByType<CardSpawnManager>();
         GameNotifyAction_Net = GetComponent<GameNotifyAction_Net>();
-        GameTurnSystem = new(this);
-        
-        
         if (!NetworkManager.Singleton.IsHost) return;
-        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += LoadEventCompleted;
         playerDeckDatas = FindFirstObjectByType<PlayerDeckDatas>();
        
     }
     void Start()
     {
         NetworkSpawnServerRpc(NetworkManager.Singleton.LocalClientId, SteamClient.Name);
+        GameTurnSystem = new(this);
         //var T = FindObjectsOfType<MapSolt>();
         if (!IsServer) return;
     }
@@ -70,15 +67,6 @@ public class CardGameManager : NetworkBehaviour
         instance = null;
         // OnNetworkDespawn();
         base.OnDestroy();
-    }
-    private async void LoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
-    {
-        if (clientsCompleted.Count == NetworkManager.Singleton.ConnectedClientsList.Count)
-        {
-            await Task.Delay(1000);
-            SeedDecks_ServerRpc();
-            CardGame_Ctrl_Net.Instance.StateChange_ServerRpc(GameState.Initialization);
-        }
     }
     [ServerRpc]
     void SeedDecks_ServerRpc()
@@ -101,12 +89,16 @@ public class CardGameManager : NetworkBehaviour
         P.GetComponent<NetworkObject>().SpawnAsPlayerObject(Id, true);
         P.UserName.Value = N;
         PlayerOBJsAdd_ClientRpc(P);
+        if(Players.Count == NetworkManager.Singleton.ConnectedClientsList.Count)
+        {
+            SeedDecks_ServerRpc();
+            CardGame_Ctrl_Net.Instance.StateChange_ServerRpc(GameState.Initialization);
+        }
     }
     [ClientRpc]
     void PlayerOBJsAdd_ClientRpc(NetworkBehaviourReference Reference )
     {
         Reference.TryGet(out var T);
-        if(T is PlayerOBJ)
         Players.Add((PlayerOBJ)T);
     }
     public void SetmyPlayer(PlayerOBJ P)

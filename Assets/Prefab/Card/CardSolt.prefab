@@ -882,15 +882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9413f7ac660b0d841a09728476808066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChidRoot: {fileID: 3895789678719233420}
-  CardArt: {fileID: 6951499382194162431}
-  CarAttributeTypeIcon: {fileID: 2764043485901496781}
-  CardBack: {fileID: 5116228931461486980}
-  CardAbilityFrame: {fileID: 7623040006197883302}
-  Useing: {fileID: 5842298459938844796}
-  BanArt: {fileID: 0}
-  CardName: {fileID: 8544427230198956006}
-  CardDes1: {fileID: 5148337882425296875}
   CurrentPlayer: {fileID: 0}
 --- !u!1 &8012744933071148543
 GameObject:
@@ -1110,7 +1101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a583b734679a67e4a83781a5414ab93e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 488a831caf4b6964f8e666db873b33c0, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

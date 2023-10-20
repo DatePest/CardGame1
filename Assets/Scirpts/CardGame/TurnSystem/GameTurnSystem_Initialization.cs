@@ -15,12 +15,12 @@ public class GameTurnSystem_Initialization : I_StatePattern
         if (!NetworkManager.Singleton.IsHost) return;
         var P1 = gameManagerInstance.Players[0].OwnerClientId;
         var P2 = gameManagerInstance.Players[1].OwnerClientId;
-        CardGame_Ctrl_Net.Instance.SetPlayerOwnerNumberID_ClientRpc((byte)P1, 0);
-        CardGame_Ctrl_Net.Instance.SetPlayerOwnerNumberID_ClientRpc((byte)P2, 1);
+        CardGame_Ctrl_Net.Instance.SetPlayerOwnerNumberID_ServerRpc((byte)P1, 0);
+        CardGame_Ctrl_Net.Instance.SetPlayerOwnerNumberID_ServerRpc((byte)P2, 1);
         gameManagerInstance.CardSpawnManager.SetCardSpawnScriptsOwnerID_ServerRpc(0, (byte)P1);
         gameManagerInstance.CardSpawnManager.SetCardSpawnScriptsOwnerID_ServerRpc(1, (byte)P2);
 
-        CardGame_Ctrl_Net.Instance.Find_CardSpawnScriptClientRpc();
+        CardGame_Ctrl_Net.Instance.Find_CardSpawnScript_ServerRpc();
         gameManagerInstance.GameSceneUI.FInger_Guessing.StartFinger_Guessing();
         gameManagerInstance.CardSpawnManager.InstantiateDeck_ServerRpc();
         gameManagerInstance.CardSpawnManager.ClientSynchronizServerRpc((byte)P1, CardsPileEnum.deck,true);

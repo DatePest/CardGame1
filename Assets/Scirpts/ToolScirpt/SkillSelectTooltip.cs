@@ -8,7 +8,6 @@ public class SkillSelectTooltip : TooltipBase
     [SerializeField] TextMeshProUGUI uGUI;
     public void Show_Set(SelectTargetTpye selectTarget,TargetRange range)
     {
-
         uGUI.text = $" {TargetRangeTpye(range)} {TargetTpye(selectTarget)}";
         gameObject.SetActive(true);
     }

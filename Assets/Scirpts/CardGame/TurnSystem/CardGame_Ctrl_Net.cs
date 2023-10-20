@@ -19,6 +19,10 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
         NetworkManager.Singleton.OnClientDisconnectCallback += PlayerClientDisconnect;
         cardGameManager = GetComponent<CardGameManager>();
     }
+    private void OnDisable()
+    {
+        NetworkManager.Singleton.OnClientDisconnectCallback -= PlayerClientDisconnect;
+    }
 
     private void PlayerClientDisconnect(ulong Id)
     {
@@ -34,14 +38,16 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
             }
         }
     }
+
     #region Inst
+    [ServerRpc]
+    public void SetPlayerOwnerNumberID_ServerRpc(byte ID, int Number) => SetPlayerOwnerNumberID_ClientRpc(ID, Number);
     [ClientRpc]
-    public void SetPlayerOwnerNumberID_ClientRpc(byte ID, int Number)
-    {
-        cardGameManager.Maps[Number].SetPlayerOwnerID(ID);
-    }
+    public void SetPlayerOwnerNumberID_ClientRpc(byte ID, int Number) => cardGameManager.Maps[Number].SetPlayerOwnerID(ID);
+    [ServerRpc]
+    public void Find_CardSpawnScript_ServerRpc() => Find_CardSpawnScript_ClientRpc();
     [ClientRpc]
-    public void Find_CardSpawnScriptClientRpc()
+    public void Find_CardSpawnScript_ClientRpc()
     {
         foreach (var a in cardGameManager.Players)
         {
@@ -51,7 +57,7 @@ public class CardGame_Ctrl_Net : NetworkBehaviour
     #endregion
 
     #region GameStateUpdate
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void GameStateUpdateServerRpc() => GameStateUpdateClientRpc();
     [ClientRpc]
     void GameStateUpdateClientRpc() => cardGameManager.GameTurnSystem.GameStateUpdate();

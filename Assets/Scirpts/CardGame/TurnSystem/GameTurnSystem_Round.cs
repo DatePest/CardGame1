@@ -95,7 +95,10 @@ public class GameTurnSystem_Round : I_StatePattern
                 break;
             if(S is Round_Battle)
             {
-                gameManagerInstance.GameSceneUI.BattleUI.BattleShomScreen(ref S);
+                //if (gameManagerInstance == null) Debug.LogError("1");
+                //if (gameManagerInstance.GameSceneUI == null) Debug.LogError("2");
+                //if (gameManagerInstance.GameSceneUI.BattleUI == null) Debug.LogError("3");
+                gameManagerInstance.GameSceneUI.BattleUI.BattleShowScreen(ref S);
             }
             S = S.NextState;
         }

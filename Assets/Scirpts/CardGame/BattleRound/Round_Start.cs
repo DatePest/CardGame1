@@ -17,10 +17,6 @@ public class Round_Start : Round_IState
         foreach(var a in gameTurnSystem_Round.Players)
         {
             a.SetCurrentReset();
-            //if (CardGameManager.Instance.IsSingleplayer)
-            //a.SetCurrentReset();
-            //else
-            //a.SetCurrentResetServerRpc();
         }
         gameTurnSystem_Round.Players[0].RoundStart(5);
         gameTurnSystem_Round.Players[1].RoundStart(6);

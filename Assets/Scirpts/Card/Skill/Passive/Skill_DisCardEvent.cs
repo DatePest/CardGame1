@@ -40,7 +40,6 @@ public class Skill_DisCardEvent : PassiveRoundEventBase
         NotTarget();
         NeedTarget();
         NeedTS();
-        Debug.Log("Skill_DisCardEvent");
     }
 }
 

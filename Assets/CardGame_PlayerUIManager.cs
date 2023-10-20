@@ -20,13 +20,14 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
     public SkillSelectTooltip Get_SkillselectTooltip() => skillselectTooltip;
     public CardSelectUI Get_CardSelectManager() => cardSelectManager;
     public PlayerStatetip Get_PlayerStatetip() => playerTooltip;
-    private void Awake()
+   
+    private void Start()
     {
-        base.Awake();
         skillselectTooltip = Instantiate(skillselectTooltip, transform, false);
         cardSelectManager = Instantiate(cardSelectManager, transform, false);
         playerTooltip = Instantiate(playerTooltip, transform, false);
         InsUI_EventAdd();
+
     }
     private void OnDestroy()
     {
@@ -44,6 +45,7 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
         UseEx = Instantiate(UseEx, transform, false);
         EX_Select = Instantiate(EX_Select, transform, false);
         TS_AddSelect = Instantiate(TS_AddSelect, transform, false);
+
         ButtonAction.Add((byte)ButtonAction.Count, End);
         ButtonAction.Add((byte)ButtonAction.Count, Card_EX_YesButton);
         ButtonAction.Add((byte)ButtonAction.Count, Card_EX_NoButton);
@@ -52,6 +54,12 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
         ButtonAction.Add((byte)ButtonAction.Count, TS_WexButton);
         ButtonAction.Add((byte)ButtonAction.Count, TS_DexButton);
         ButtonAction.Add((byte)ButtonAction.Count, TS_NullButton);
+
+        EndButton.RStart();
+        UseEx.RStart();
+        EX_Select.RStart();
+        TS_AddSelect.RStart();
+
     }
     void End(GameObject g)
     {
@@ -110,14 +118,14 @@ public class CardGame_PlayerUIManager : Singleton_T_Mono<CardGame_PlayerUIManage
     }
     public void Card_EX_Button(Action<int> Action)
     {
-        EX_ReturnAction = Action;
         UseEx.gameObject.SetActive(true);
+        EX_ReturnAction = Action;
     }
 
     public void SetActiveEX_Select(Action<int> Action, bool Ex1, bool Ex2)
     {
+        EX_Select.gameObject.SetActive(true);
         EX_ReturnAction = Action;
-        EX_Select.gameObject.SetActive(false);
         EX_Select.GetButton(0).gameObject.SetActive(false);
         EX_Select.GetButton(1).gameObject.SetActive(false);
         if (Ex1) EX_Select.GetButton(0).gameObject.SetActive(true);

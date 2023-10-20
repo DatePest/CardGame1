@@ -12,7 +12,7 @@ public class Ability_Event_BeDamage_DamgerAdd_Enforce : BeDamage_Event
     protected override void IEvent(SO_Unit BeDamageUnit, SO_Unit AtkUnit, int arg3)
     {
         if(addTarget == AddTarget.HurtUnit)
-        BeDamageUnit.TakeDamger(Addvalue + (int)(arg3* multiply), null, UnitHitTpye.Hit, AttackDamgerTpye.Enforce);
+            BeDamageUnit.TakeDamger(Addvalue + (int)(arg3* multiply), null, UnitHitTpye.Hit, AttackDamgerTpye.Enforce);
         else
             AtkUnit.TakeDamger(Addvalue + (int)(arg3 * multiply), null, UnitHitTpye.Hit, AttackDamgerTpye.Enforce);
     }

@@ -61,6 +61,7 @@ public class PlayerFingerGuessing : MonoBehaviour
 
     public void FingerGuessingStart()
     {
+        gameObject.SetActive(true);
         scissors.transform.parent.gameObject.SetActive(true);
     }
 
