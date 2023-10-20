@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab1a016764922746bee35048d017836, type: 3}
+  m_Name: BuffData_Change_Land
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 21032623dd51e7a409355fd4e35ba2dd, type: 3}
+  buffID: BuffData_Change_Land
+  Description: 
+  IsCanDispel: 1
+  IsCanStack: 0
+  IsUnique: 1
+  UniqueLevel: 0
+  StackTimes: 1
+  buffTpye: 0
+  abilityClass: 0
+  Abilitys:
+  - {fileID: 11400000, guid: 61955720f3fe21c46b0cf828f3444478, type: 2}
+  IsNATimes: 0
+  TimeRound: 1
+  EndToRound_: 0

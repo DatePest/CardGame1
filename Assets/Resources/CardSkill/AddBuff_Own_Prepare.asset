@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5745c05f0a0d9041bc8f4187da2bb19, type: 3}
+  m_Name: AddBuff_Own_Prepare
+  m_EditorClassIdentifier: 
+  abilityID: AddBuff_Own_Prepare
+  SkillDepiction: "AddBuff_Own_Prepare\n\u5099\u6230"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 2
+  Temp_SaveData: 0
+  UseTemp_LoadData: 0
+  LoadData_NotLoadMap: 0
+  SelectType1: 0
+  SortTpye1: 0
+  unitChecks1: []
+  targetRange_1: 1
+  UnitTyperange:
+    Hero: 1
+    Summoner: 0
+    Barrier: 0
+  buffSOs:
+  - {fileID: 11400000, guid: 8d60b052f24dff84699f8247c74c6f79, type: 2}

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab1a016764922746bee35048d017836, type: 3}
+  m_Name: SpecialUse_BuffData_H004C_Useed
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  buffID: SpecialUse_BuffData_H004C_Useed
+  Description: H004C_Used
+  IsCanDispel: 0
+  IsCanStack: 0
+  IsUnique: 1
+  IsHide: 0
+  UniqueLevel: 0
+  StackTimes: 1
+  buffTpye: 3
+  abilityClass: 0
+  Abilitys: []
+  IsNATimes: 0
+  TimeRound: 1
+  EndToRound_: 7

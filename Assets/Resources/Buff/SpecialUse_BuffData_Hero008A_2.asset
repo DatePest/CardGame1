@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab1a016764922746bee35048d017836, type: 3}
+  m_Name: SpecialUse_BuffData_Hero008A_2
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  buffID: SpecialUse_BuffData_Hero008A_2
+  Description: "\u6F14\u594F\u66F2\u7D2F\u7A4D"
+  IsCanDispel: 0
+  IsCanStack: 1
+  IsUnique: 1
+  UniqueLevel: 0
+  StackTimes: 1
+  buffTpye: 3
+  abilityClass: 0
+  Abilitys:
+  - {fileID: 11400000, guid: 7905d1dfa100ffe4da91b40d4873f2f7, type: 2}
+  IsNATimes: 0
+  TimeRound: 1
+  EndToRound_: 0

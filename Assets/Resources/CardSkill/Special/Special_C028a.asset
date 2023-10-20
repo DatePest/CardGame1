@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0871e182629a201449ab33c49e531696, type: 3}
+  m_Name: Special_C028a
+  m_EditorClassIdentifier: 
+  abilityID: Special_C028a
+  SkillDepiction: "\u5982\u679C\u624B\u4E0A\u6709\u300C\u958B\u95E2\u4E4B\u528D\u300D\u5247\u5C07\u5176\u6368\u68C4\r\n\u6307\u5B9A1\u540D\u6211\u65B9\u55AE\u4F4D\u8B77\u7532+2"
+  skillUseChecks:
+  - {fileID: 11400000, guid: 87657d5f37e3b224781d8c9ad07588ed, type: 2}
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 2
+  SelectType1: 0
+  SortTpye1: 0
+  unitChecks1: []
+  targetRange_1: 1
+  Abilities:
+  - {fileID: 11400000, guid: 0a8bcbcbf8044134088f9e769c90ea80, type: 2}
+  ExtraAbilities: []

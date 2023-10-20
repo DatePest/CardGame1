@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0871e182629a201449ab33c49e531696, type: 3}
+  m_Name: Special_C027a
+  m_EditorClassIdentifier: 
+  abilityID: Special_C027a
+  SkillDepiction: "WEX1\uFF1A\u7D66\u4E88\u8A72\u55AE\u4F4D\u7C89\u788E\u8207\u7A7F\u75321"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 2
+  skillType: 0
+  SelectType1: 0
+  SortTpye1: 0
+  unitChecks1: []
+  targetRange_1: 1
+  Abilities:
+  - {fileID: 11400000, guid: dadc63144ab090e4e92d7b252bdefd00, type: 2}
+  - {fileID: 11400000, guid: e874fae1abe2b3a4bb92410df2730d61, type: 2}
+  ExtraAbilities: []

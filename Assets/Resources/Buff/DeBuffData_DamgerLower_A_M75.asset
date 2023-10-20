@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab1a016764922746bee35048d017836, type: 3}
+  m_Name: DeBuffData_DamgerLower_A_M75
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
+  buffID: DeBuffData_DamgerLower_A_M75
+  Description: "\u9020\u6210\u7684\u50B7\u5BB3\u6E1B\u5C1125%"
+  IsCanDispel: 1
+  IsCanStack: 0
+  IsUnique: 0
+  UniqueLevel: 0
+  StackTimes: 1
+  buffTpye: 1
+  abilityClass: 0
+  Abilitys:
+  - {fileID: 11400000, guid: d5250c40eabdd2e46b02bbc72f5973d5, type: 2}
+  IsNATimes: 0
+  TimeRound: 1
+  EndToRound_: 0

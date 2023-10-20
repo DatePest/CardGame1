@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d874672dab001884386d07a81cd5dc86, type: 3}
+  m_Name: UserTarget_IF_Card009B
+  m_EditorClassIdentifier: 
+  abilityID: UserTarget_IF_Card009B
+  SkillDepiction: "\nWEX5\uFF1A\u7372\u5F97\u5805\u5FCD\uFF0C\u5982\u679C\u5DF2\u6709\u5805\u5FCD\u5247\u6539\u70BA\u9748\u76FE3\""
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 2
+  Temp_SaveData: 0
+  UseTemp_SaveData: 1
+  SelectType1: 0
+  SortTpye1: 0
+  unitChecks1: []
+  targetRange_1: 1
+  UnitCheck: {fileID: 11400000, guid: 9a0543b74ba4a3c45856fd54450e04e3, type: 2}
+  FalseCheck_UserTarget:
+  - {fileID: 11400000, guid: 24b34ccce687e584f95eb9b50e42b6ea, type: 2}
+  TrunCheck_UserTarget:
+  - {fileID: 11400000, guid: 4c662ab7d92f477499abe7f0c5c372a6, type: 2}
+  FalseCheck_NotTarget: []
+  TrunCheck_NotTarget: []

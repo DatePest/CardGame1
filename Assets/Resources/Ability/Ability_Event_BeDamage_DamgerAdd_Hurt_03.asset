@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f58aae4645f214d8a3b0c8625a3324, type: 3}
+  m_Name: Ability_Event_BeDamage_DamgerAdd_Hurt_03
+  m_EditorClassIdentifier: 
+  AbilityId: Ability_Event_BeDamage_DamgerAdd_Hurt_03
+  addTarget: 1
+  Addvalue: 3
+  multiply: 0

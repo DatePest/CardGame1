@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e6220d8f5710f43a3632f4101d88ba, type: 3}
+  m_Name: Ability_Evene_AttackStart_addBuff_Fire_Hero04
+  m_EditorClassIdentifier: 
+  AbilityId: Ability_Evene_AttackStart_addBuff_Fire_Hero04
+  addTarget: 1
+  AddbuffBase:
+    buffSO: {fileID: 11400000, guid: 46adca57d2a98f348953310c42526aaa, type: 2}
+    TimeExtension: 0

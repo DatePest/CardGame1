@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4e201d7e1ca4d48b22d53e4c054181, type: 3}
+  m_Name: Attack_Column_load_NotMapsolt
+  m_EditorClassIdentifier: 
+  abilityID: Attack_Column_load
+  SkillDepiction: "\u76F4\u6392 \u4E0D\u4F7F\u7528\u5730\u5716\u683C"
+  skillUseChecks: []
+  DisCard_Extra_SkillCheckList: []
+  skill_Rule: 0
+  Temp_SaveData: 1
+  UseTemp_LoadData: 1
+  LoadData_NotLoadMap: 1
+  SelectType1: 0
+  SortTpye1: 0
+  unitChecks1: []
+  targetRange_1: 1
+  UnitTyperange:
+    Hero: 1
+    Summoner: 0
+    Barrier: 0
+  SelectType2: 0
+  condition: 0
+  targetRange_2: 0
+  mapShow2: 3
