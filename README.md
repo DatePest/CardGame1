@@ -3,10 +3,12 @@
 卡表以及效果可以參考 
 [卡片目錄以及規則說明](https://docs.google.com/spreadsheets/d/1XywOKKZI-OnjYv1XHdKN56nJ12PP9B_K/edit?usp=sharing&ouid=102980525715795086892&rtpof=true&sd=true)
 
-#規則&玩法說明還未補齊#
+[規則&玩法說明](https://docs.google.com/document/d/1WIvV69A6muZ0DK2qZ7VcrxK89-HkB6Hv/edit)
 
 #戰鬥是一瞬間是正常的，因為一開始就沒有做動畫演出的打算#
 
 #此程式只有連線對戰的功能請保持Steam的登入狀態#
 
 嘗試從零開始邊學邊做的原因可能又些東西做得不是很好，遊玩過程遇到的問題也歡迎回報
+
+[遊玩的錄影](https://youtu.be/mQ6QFaNTrX0)
